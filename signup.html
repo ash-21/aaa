@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<style>
+body {
+    background-image: url("background.jpg");
+}
+
+/* Full-width input fields */
+input[type=text] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px inset #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+    padding: 14px 20px;
+    background-color: #f44336;
+}
+
+/* Add padding to container elements */
+.container {
+    padding: 12px 350px;
+    //border:1px solid #ccc;
+}
+
+</style>
+<body>
+
+<h2><center><span style="color:brown">Signup Form</span></center></h2>
+<form action="/action_page.php">
+    <div class="container">
+        <label><b>Name</b></label><br>
+        <input type="text" name="name" required><br>
+        
+        <label><b>Profession</b></label><br>
+        <input type="text" name="profession" required><br>
+        
+        <label><b>Home Address</b></label><br>
+        <input type="text" name="homeAddress" required><br>
+        
+        <label><b>Work Address</b></label><br>
+        <input type="text" name="workAddress" required><br>
+        
+        <label><b>Email</b></label><br>
+        <input type="text" name="email" required><br>
+        
+        <label><b>Phone No</b></label><br>
+        <input type="text" name="phoneNo" required><br>
+        
+        <label><b>Gender</b></label>
+        <input type="radio" name="gender" value="male" checked> Male
+        <input type="radio" name="gender" value="female"> Female<br>
+        
+        <input type="checkbox" checked="checked"> Remember me
+        
+        <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+        
+        <div class="clearfix">
+            <button type="submit" class="signupbtn">Sign Up</button>
+            <button type="button" class="cancelbtn">Cancel</button>
+        </div>
+    </div>
+</form>
+
+</body>
+</html>
