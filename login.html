@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sign-In</title>
+<link rel="stylesheet" type="text/css" href="css/login.css">
+</head>
+<body id="body-color">
+<div id="Sign-In">
+<fieldset style="width:30%"><legend>SIGN-IN HERE</legend>
+<form method="POST" action="main.html">
+Username <br><input type="text" name="userid" size="40" required><br>
+Password <br><input type="password" name="pass" size="40" required><br>
+<input id="button" input type="submit" onclick="check(this.form)" value="Login"/>
+<input id="button" input type="reset" value="Cancel"/>
+</form>
+
+<!--<script language="javascript">
+function check(form)/*function to check userid & password*/
+{
+
+  if(form.userid.value == "id" && form.pswrd.value == "123")
+  {
+    window.open('main.html')
+  }
+  else {
+    alert("Error Password or Username")
+  }
+}
+</script> -->
+</fieldset>
+</div>
+</body>
+</html>
