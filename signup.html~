@@ -33,7 +33,7 @@ body, html {
     <div class="w3-right w3-hide-small">
       <a href="signup.html" class="w3-bar-item w3-button">Sign Up</a>
       <a href="login.html" class="w3-bar-item w3-button">Log In</a>
-      <a href="#Search" class="w3-bar-item w3-button">Search</a>
+      <a href="search.html" class="w3-bar-item w3-button">Search</a>
     </div>
   </div>
 </div>
@@ -52,7 +52,7 @@ body, html {
   <fieldset>
 <legend>PERSONAL INFORMATION:</legend>
     <label><b>Name</b></label><br>
-        <input type="text" name="name" size="40" required><br>
+        <input type="text" name="userName" size="40" required><br>
         
         <label><b>Profession</b></label><br>
         <input type="text" name="profession" size="40" required><br>
