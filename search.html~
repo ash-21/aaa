@@ -41,56 +41,21 @@ body, html {
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
 
-
-<!-- Sign Up Section -->
- <form action="/action_signUp.php" method="post" id="form1">
-    <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="Sign Up">
+<!-- Log In Section -->
+ <form action="/action_search.php">
+<div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="Log In">
     <div class="w3-row w3-padding-32">
       <div class="w3-col m6 w3-large w3-margin-bottom">
-<div id="Sign Up">
-
-  <fieldset>
-<legend>PERSONAL INFORMATION:</legend>
-    <label><b>Name</b></label><br>
-        <input type="text" name="userName" size="40" required><br>
-        
-        <label><b>Profession</b></label><br>
-        <input type="text" name="profession" size="40" required><br>
-        
-        <label><b>Home Address</b></label><br>
-        <input type="text" name="homeAddress" size="40" required><br>
-        
-        <label><b>Work Address</b></label><br>
-        <input type="text" name="workAddress" size="40" required><br>
-        
-        <label><b>Email</b></label><br>
-        <input type="text" name="email" size="40" required><br>
-        
-        <label><b>Phone No</b></label><br>
-        <input type="text" name="phoneNo" size="40" required><br>
-        
-        <label><b>Password</b></label><br>
-        <input type="password" name="password" size="40" required><br>
-
-        <label><b>Confirm Password</b></label><br>
-        <input type="password" name="passwordConfirmation" size="40" required><br>
-
-        <label><b>Gender</b></label>
-        <input type="radio" name="gender" value="male" checked> Male
-        <input type="radio" name="gender" value="female"> Female<br>
-        
-        <input type="checkbox" checked="checked"> Remember me
-        
-        <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-        
-        <div class="clearfix">
-            <button type="submit" form="form1">Sign Up</button>
-            <button type="button"  form="form1">Cancel</button>
-	  </fieldset>
-        </div>
-    </div>
+  <div id="Search">
+<fieldset style="width:30%">
+<legend>Search </legend>
+<form method="POST" action="action_page_login.php">
+<label><b>Name </b></label><br>
+<input type="text" name="userName" size="40" required><br>
+<label><b>Profession</b></label><br>
+<input type="text" name="profession" size="40" required><br>
+<input id="button" input type="submit" onclick="check(this.form)" value="Search"/>
 </form>
-
 
 <!--<script language="javascript">
 function check(form)/*function to check userid & password*/
@@ -98,7 +63,7 @@ function check(form)/*function to check userid & password*/
 
   if(form.userid.value == "id" && form.pswrd.value == "123")
   {
-    window.open('main.html')
+    window.open('index.html')
   }
   else {
     alert("Error Password or Username")
@@ -106,7 +71,8 @@ function check(form)/*function to check userid & password*/
 }
 </script> -->
 </fieldset>
-</div></div>
+</div>
+</div>
 </div>
 </div>
 </form> 

@@ -43,7 +43,7 @@ body, html {
 
 
 <!-- Sign Up Section -->
- <form action="/action_signUp.php" method="post" id="form1">
+ <form action="/action_page_password_hash.php" method="post" id="form1">
     <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="Sign Up">
     <div class="w3-row w3-padding-32">
       <div class="w3-col m6 w3-large w3-margin-bottom">
@@ -70,10 +70,10 @@ body, html {
         <input type="text" name="phoneNo" size="40" required><br>
         
         <label><b>Password</b></label><br>
-        <input type="password" name="password" size="40" required><br>
+        <input type="text" name="password" size="40" required><br>
 
         <label><b>Confirm Password</b></label><br>
-        <input type="password" name="passwordConfirmation" size="40" required><br>
+        <input type="text" name="passwordConfirmation" size="40" required><br>
 
         <label><b>Gender</b></label>
         <input type="radio" name="gender" value="male" checked> Male
