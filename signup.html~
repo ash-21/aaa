@@ -52,7 +52,7 @@ body, html {
   <fieldset>
 <legend>PERSONAL INFORMATION:</legend>
     <label><b>Name</b></label><br>
-        <input type="text" name="userName" size="40" required><br>
+        <input type="text" name="name" size="40" required><br>
         
         <label><b>Profession</b></label><br>
         <input type="text" name="profession" size="40" required><br>
