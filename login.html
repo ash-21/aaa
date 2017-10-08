@@ -42,20 +42,20 @@ body, html {
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
 
 <!-- Log In Section -->
- <form action="/action_login.php">
+ <form method="POST" action="/action_login.php">
 <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="Log In">
     <div class="w3-row w3-padding-32">
       <div class="w3-col m6 w3-large w3-margin-bottom">
   <div id="Log In">
 <fieldset style="width:30%">
 <legend>SIGN IN </legend>
-<form method="POST" action="action_page_login.php">
-<label><b>User Name</b></label><br>
-<input type="text" name="userid" size="40" required><br>
+
+<form method="POST" action="/action_login.php">
+<label><b>Email</b></label><br>
+<input type="text" name="email" size="40" required><br>
 <label><b>Password</b></label><br>
-<input type="password" name="pass" size="40" required><br>
-<input id="button" input type="submit" onclick="check(this.form)" value="Login"/>
-<input id="button" input type="reset" value="Cancel"/>
+<input type="password" name="password" size="40" required><br>
+<button type="submit">Log in</button>
 </form>
 
 <!--<script language="javascript">
