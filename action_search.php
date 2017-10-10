@@ -1,3 +1,4 @@
+//sakib's edition
 <?php
 $dbhost = 'localhost';
 $dbuser = 'root';
