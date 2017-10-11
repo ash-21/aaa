@@ -68,9 +68,8 @@ body, html {
     <a href=\"index.html\" class=\"w3-bar-item w3-button\"><b>A</b>utomated <b>A</b>ppointment<b> A</b>ssistant</a>
     <!-- Float links to the right. Hide them on small screens -->
     <div class=\"w3-right w3-hide-small\">
-      <a href=\"signup.html\" class=\"w3-bar-item w3-button\">Sign Up</a>
-      <a href=\"login.html\" class=\"w3-bar-item w3-button\">Log In</a>
       <a href=\"search.html\" class=\"w3-bar-item w3-button\">Search</a>
+      <a href=\"index.html\" class=\"w3-bar-item w3-button\">Log Out</a>
     </div>
   </div>
 </div>
