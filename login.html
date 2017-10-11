@@ -41,13 +41,15 @@ body, html {
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
 
 <!-- Log In Section -->
+<div>
+<div style="float: left; margin-left: 200px">
+<!-- User -->			
  <form method="POST" action="/action_login.php">
-<div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="Log In">
     <div class="w3-row w3-padding-32">
       <div class="w3-col m6 w3-large w3-margin-bottom">
   <div id="Log In">
 <fieldset style="width:30%">
-<legend>SIGN IN </legend>
+<legend>User SIGN IN </legend>
 
 <form method="POST" action="/action_login.php">
 <label><b>Email</b></label><br>
@@ -56,6 +58,28 @@ body, html {
 <input type="password" name="password" size="40" required><br>
 <button type="submit">Log in</button>
 </form>
+</div>
+</div>
+
+<!-- Client -->
+<div style="float: right; margin-top: -32px">
+ <form method="POST" action="/action_login_client.php">
+    <div class="w3-row w3-padding-32">
+      <div class="w3-col m6 w3-large w3-margin-bottom">
+  <div id="Log In">
+<fieldset style="width:30%">
+<legend>Client SIGN IN </legend>
+
+<form method="POST" action="/action_login_client.php">
+<label><b>Email</b></label><br>
+<input type="text" name="email" size="40" required><br>
+<label><b>Password</b></label><br>
+<input type="password" name="password" size="40" required><br>
+<button type="submit">Log in</button>
+</form>
+</div>
+</div>
+
 
 <!--<script language="javascript">
 function check(form)/*function to check userid & password*/
@@ -79,14 +103,14 @@ function check(form)/*function to check userid & password*/
 
 
   <!-- The Contact Section -->
-  <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="contact">
+  <div class="w3-container w3-content w3-padding-32" style="max-width:950px" id="contact">
     <h2 class="w3-wide w3-center">CONTACT</h2>
     <p class="w3-opacity w3-center"><i>Any advice? Drop a note!</i></p>
     <div class="w3-row w3-padding-32">
       <div class="w3-col m6 w3-large w3-margin-bottom">
         <i class="fa fa-map-marker" style="width:30px"></i> Dhaka, Bangladesh<br>
         <i class="fa fa-phone" style="width:30px"></i> Phone: +8801521212121<br>
-        <i class="fa fa-envelope" style="width:30px"> </i> Email:SDP@gmail.com<br>
+        <i class="fa fa-envelope" style="width:30px"> </i> Email: automatedappointmentassistance@gmail.com<br>
       </div>
       <div class="w3-col m6">
         <form action="/action_page.php" target="_blank">
