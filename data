@@ -1,3 +1,0 @@
-set @temp = (select min(appointmentTime) from appointments);
-call make_intervals(@temp,now(),1,'MONTH');
-select interval_start,count(*) from time_intervals,appointments where appointmentTime between interval_start and interval_end group by interval_start;
