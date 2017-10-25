@@ -10,13 +10,13 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$email = addslashes($_POST['email']);
+$email_userID = addslashes($_POST['email_userID']);
 $password = addslashes($_POST['password']);
 
 $query = <<<SQL
 	select *
 	from clients
-	where email = '{$email}'
+	where email = '{$email_userID}' or clientID = '{$email_userID}'
 SQL;
 
 print "<!DOCTYPE html>
@@ -72,12 +72,19 @@ if ($result= $conn->query($query))
 {
   $row = $result->fetch_assoc();
   if($row){
-  	if(password_verify($password,$row['password'])) {
+	if((strlen($password) == 0) && is_null($row['password'])) {
+		print "<h2><strong>{$row['name']}</strong></h2>";
+        print "<p><i class=\"fa fa-address-card fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['clientID']}</p>";
+        print "<p><i class=\"fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['email']}</p>";
+        print "<p><i class=\"fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['phone']}</p>";
+    }
+  	else if (password_verify($password,$row['password'])) {
   		print "<h2><strong>{$row['name']}</strong></h2>";
-  		print "<p><i class=\"fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['email']}</p>";
+        print "<p><i class=\"fa fa-address-card fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['clientID']}</p>";
+        print "<p><i class=\"fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['email']}</p>";
         print "<p><i class=\"fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['phone']}</p>";
   	}
-  	else printf("<h1>No Such Profile :(</h1>");
+  	else print "<h1>No Such Profile <i class=\"fa fa-meh-o\"></i></h1> ";
   }
   else printf("No such mail id");
   $result->free();
