@@ -72,21 +72,21 @@ if ($result= $conn->query($query))
 {
   $row = $result->fetch_assoc();
   if($row){
-  	if(password_verify($password,$row['password'])) {
+  	if(!is_null($password) && is_null($row['password'])) {
+		print "<h2><strong>{$row['name']}</strong></h2>";
+        print "<p><i class=\"fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['profession']}</p>";
+        print "<p><i class=\"fa fa-home fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['workAddress']}</p>";
+        print "<p><i class=\"fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['email']}</p>";
+        print "<p><i class=\"fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['phone']}</p>";
+        print "<p><i class=\"fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['password']}</p>";
+    }
+  	else if (password_verify($password,$row['password'])) {
   		print "<h2><strong>{$row['name']}</strong></h2>";
         print "<p><i class=\"fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['profession']}</p>";
         print "<p><i class=\"fa fa-home fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['workAddress']}</p>";
         print "<p><i class=\"fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['email']}</p>";
         print "<p><i class=\"fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['phone']}</p>";
   	}
-  	else if($row){
-		print "<h2><strong>{$row['name']}</strong></h2>";
-        print "<p><i class=\"fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['userID']}</p>";
-        print "<p><i class=\"fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['profession']}</p>";
-        print "<p><i class=\"fa fa-home fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['workAddress']}</p>";
-        print "<p><i class=\"fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['email']}</p>";
-        print "<p><i class=\"fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['phone']}</p>";
-    }
   	else printf("<h1>No Such Profile :(</h1>");
   }
   else printf("No such mail id");
