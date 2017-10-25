@@ -10,13 +10,13 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$email = addslashes($_POST['email']);
+$email_userID = addslashes($_POST['email_userID']);
 $password = addslashes($_POST['password']);
 
 $query = <<<SQL
 	select *
 	from users
-	where email = '{$email}'
+	where email = '{$email_userID}' or userID = '{$email_userID}'
 SQL;
 
 print "<!DOCTYPE html>
@@ -72,8 +72,9 @@ if ($result= $conn->query($query))
 {
   $row = $result->fetch_assoc();
   if($row){
-  	if((strlen($password) == 0) && is_null($row['password'])) {
+	if((strlen($password) == 0) && is_null($row['password'])) {
 		print "<h2><strong>{$row['name']}</strong></h2>";
+        print "<p><i class=\"fa fa-address-card fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['userID']}</p>";
         print "<p><i class=\"fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['profession']}</p>";
         print "<p><i class=\"fa fa-home fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['workAddress']}</p>";
         print "<p><i class=\"fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['email']}</p>";
@@ -81,12 +82,13 @@ if ($result= $conn->query($query))
     }
   	else if (password_verify($password,$row['password'])) {
   		print "<h2><strong>{$row['name']}</strong></h2>";
+        print "<p><i class=\"fa fa-address-card fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['userID']}</p>";
         print "<p><i class=\"fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['profession']}</p>";
         print "<p><i class=\"fa fa-home fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['workAddress']}</p>";
         print "<p><i class=\"fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['email']}</p>";
         print "<p><i class=\"fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['phone']}</p>";
   	}
-  	else printf("<h1>No Such Profile :(</h1>");
+  	else print "<h1>No Such Profile <i class=\"fa fa-meh-o\"></i></h1> ";
   }
   else printf("No such mail id");
   $result->free();
@@ -94,7 +96,7 @@ if ($result= $conn->query($query))
     echo "Error: " . $query . "<br>" . $conn->error;
 }
 
-//$conn->close();
+$conn->close();
 
 print "
 <!----------------------------->
@@ -108,34 +110,14 @@ print "
     </div>
 
     <!-- Right Column -->
-    <div class=\"w3-twothird\"> 
-    <div class=\"w3-container w3-card-2 w3-white w3-margin-bottom\">
+    <div class=\"w3-twothird\">
+    
+      <div class=\"w3-container w3-card-2 w3-white w3-margin-bottom\">
         <h2 class=\"w3-text-grey w3-padding-16\"><i class=\"fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal\"></i>Appointments</h2>
         <div class=\"w3-container\">
-    ";
-
-
-$query2 = <<<SQL
-	select *
-	from aapointments
-	where userID = '{$row['userID']}'
-SQL;
-
-if ($result2= $conn2->query($query2))
-{
-  $row2 = $result2->fetch_assoc();
-  if($row2){
-      print " <h6 class=\"w3-text-teal\"><i class=\"fa fa-calendar fa-fw w3-margin-right\"></i>{$row2['appointmentTime']}<span class=\"w3-tag w3-teal w3-round\">Current</span></h6> ";
-  }
-  else printf("No appinments");
-}
-$conn->close();
-$conn2->close();
-         
-         
-print "
-<!----------------------------->
-<!----------------------------->          
+          <h6 class=\"w3-text-teal\"><i class=\"fa fa-calendar fa-fw w3-margin-right\"></i>Jan 2015 - <span class=\"w3-tag w3-teal w3-round\">Current</span></h6>
+          
+          
           <hr>
         </div>
       </div>
