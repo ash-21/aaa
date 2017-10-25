@@ -47,6 +47,7 @@ body, html {
     <a href=\"index.html\" class=\"w3-bar-item w3-button\"><b>A</b>utomated <b>A</b>ppointment<b> A</b>ssistant</a>
     <!-- Float links to the right. Hide them on small screens -->
     <div class=\"w3-right w3-hide-small\">
+      <a href=\"search.html\" class=\"w3-bar-item w3-button\">Search</a>
       <a href=\"index.html\" class=\"w3-bar-item w3-button\">Log Out</a>
       </div>
   </div>
@@ -78,6 +79,14 @@ if ($result= $conn->query($query))
         print "<p><i class=\"fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['email']}</p>";
         print "<p><i class=\"fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['phone']}</p>";
   	}
+  	else if($row){
+		print "<h2><strong>{$row['name']}</strong></h2>";
+        print "<p><i class=\"fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['userID']}</p>";
+        print "<p><i class=\"fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['profession']}</p>";
+        print "<p><i class=\"fa fa-home fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['workAddress']}</p>";
+        print "<p><i class=\"fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['email']}</p>";
+        print "<p><i class=\"fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['phone']}</p>";
+    }
   	else printf("<h1>No Such Profile :(</h1>");
   }
   else printf("No such mail id");
@@ -86,7 +95,7 @@ if ($result= $conn->query($query))
     echo "Error: " . $query . "<br>" . $conn->error;
 }
 
-$conn->close();
+//$conn->close();
 
 print "
 <!----------------------------->
@@ -100,14 +109,34 @@ print "
     </div>
 
     <!-- Right Column -->
-    <div class=\"w3-twothird\">
-    
-      <div class=\"w3-container w3-card-2 w3-white w3-margin-bottom\">
+    <div class=\"w3-twothird\"> 
+    <div class=\"w3-container w3-card-2 w3-white w3-margin-bottom\">
         <h2 class=\"w3-text-grey w3-padding-16\"><i class=\"fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal\"></i>Appointments</h2>
         <div class=\"w3-container\">
-          <h6 class=\"w3-text-teal\"><i class=\"fa fa-calendar fa-fw w3-margin-right\"></i>Jan 2015 - <span class=\"w3-tag w3-teal w3-round\">Current</span></h6>
-          
-          
+    ";
+
+
+$query2 = <<<SQL
+	select *
+	from aapointments
+	where userID = '{$row['userID']}'
+SQL;
+
+if ($result2= $conn2->query($query2))
+{
+  $row2 = $result2->fetch_assoc();
+  if($row2){
+      print " <h6 class=\"w3-text-teal\"><i class=\"fa fa-calendar fa-fw w3-margin-right\"></i>{$row2['appointmentTime']}<span class=\"w3-tag w3-teal w3-round\">Current</span></h6> ";
+  }
+  else printf("No appinments");
+}
+$conn->close();
+$conn2->close();
+         
+         
+print "
+<!----------------------------->
+<!----------------------------->          
           <hr>
         </div>
       </div>
@@ -129,7 +158,7 @@ print "
   <i class=\"fa fa-pinterest-p w3-hover-opacity\"></i>
   <i class=\"fa fa-twitter w3-hover-opacity\"></i>
   <i class=\"fa fa-linkedin w3-hover-opacity\"></i>
-  <p>Powered by <a href=\"https://www.w3schools.com/w3css/default.asp\" target=\"_blank\">Ashraf Mahfida Sakib</a></p>
+  <p>Powered by <a href=\"https://www.w3schools.com/w3css/default.asp\" target=\"_blank\">w3.css</a></p>
 </footer>
 
 </body>
