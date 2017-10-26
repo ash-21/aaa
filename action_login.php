@@ -19,6 +19,8 @@ $query = <<<SQL
 	where email = '{$email_userID}' or userID = '{$email_userID}'
 SQL;
 
+$flag = '';
+
 print "<!DOCTYPE html>
 <html>
 <title>Appointment Assistance</title>
@@ -79,6 +81,7 @@ if ($result= $conn->query($query))
         print "<p><i class=\"fa fa-home fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['workAddress']}</p>";
         print "<p><i class=\"fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['email']}</p>";
         print "<p><i class=\"fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['phone']}</p>";
+        $flag = $row['userID'];
     }
   	else if (password_verify($password,$row['password'])) {
   		print "<h2><strong>{$row['name']}</strong></h2>";
@@ -87,6 +90,7 @@ if ($result= $conn->query($query))
         print "<p><i class=\"fa fa-home fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['workAddress']}</p>";
         print "<p><i class=\"fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['email']}</p>";
         print "<p><i class=\"fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['phone']}</p>";
+        $flag = $row['userID'];
   	}
   	else print "<h1>No Such Profile <i class=\"fa fa-meh-o\"></i></h1> ";
   }
@@ -96,7 +100,7 @@ if ($result= $conn->query($query))
     echo "Error: " . $query . "<br>" . $conn->error;
 }
 
-$conn->close();
+//$conn->close();
 
 print "
 <!----------------------------->
@@ -114,10 +118,52 @@ print "
     
       <div class=\"w3-container w3-card-2 w3-white w3-margin-bottom\">
         <h2 class=\"w3-text-grey w3-padding-16\"><i class=\"fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal\"></i>Appointments</h2>
-        <div class=\"w3-container\">
-          <h6 class=\"w3-text-teal\"><i class=\"fa fa-calendar fa-fw w3-margin-right\"></i>Jan 2015 - <span class=\"w3-tag w3-teal w3-round\">Current</span></h6>
+        <div class=\"w3-container\"> 
+        
+        <table class=\"w3-table w3-striped w3-white\">
+          <tbody>
+          <tr>
+          <td></td>
+          <td><span class=\"w3-tag w3-teal w3-round\">Client Name</span></td>
+          <td><span class=\"w3-tag w3-teal w3-round\">Appointment Time</span></td>
+          <td><span class=\"w3-tag w3-teal w3-round\">Appointment ID</span></td>
+          </tr>
+          </tbody> ";
+
+
+$query2 = <<<SQL
+	select *
+	from appointments
+	where userID = '{$flag}'
+SQL;
+
+if ($result2= $conn->query($query2))
+{
+  while ($row2 = $result2->fetch_assoc()) {
+	$flag2 = $row2['clientID'];
+	$query3 = <<<SQL
+	select *
+	from clients
+	where clientID = '{$flag2}'
+SQL;
+	$result3= $conn->query($query3);
+	$row3 = $result3->fetch_assoc();
+	print "<tr>
+            <td><i class=\"w3-text-blue w3-large\"></i></td>
+            <td><i>{$row3['name']}</i></td>
+            <td><i>{$row2['appointmentTime']}</i></td>
+            <td><i>{$row2['appointmentID']}</i></td>
+         </tr>";
+  }
+  $result2->free();
+}
+
+$conn->close();
           
-          
+print "
+<!----------------------------->
+<!----------------------------->          
+            </table>
           <hr>
         </div>
       </div>
