@@ -1,14 +1,11 @@
 <?php
-$dbhost = 'localhost';
-$dbuser = 'root';
-$dbpass = 'asdfzxcv';
-$db = 'aaaDatabase';
-
-
-$conn =new mysqli($dbhost,$dbuser,$dbpass,$db);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+function __autoload($class_name) {
+  require_once $class_name . '.php';
 }
+
+$database_object = singleton_database::getInstance();
+
+$conn = $database_object->getDatabase();
 
 $email_userID = addslashes($_POST['email_userID']);
 $password = addslashes($_POST['password']);

@@ -23,15 +23,13 @@ $mail->setFrom('automatedappointmentassistance@gmail.com', 'AAA');
 $mail->addReplyTo('automatedappointmentassistance@gmail.com', 'AAA');
 /*******************************/
 /********************************/
-$dbhost = 'localhost';
-$dbuser = 'root';
-$dbpass = 'asdfzxcv';
-$db = 'aaaDatabase';
-
-$conn =new mysqli($dbhost,$dbuser,$dbpass,$db);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+function __autoload($class_name) {
+  require_once $class_name . '.php';
 }
+
+$database_object = singleton_database::getInstance();
+
+$conn = $database_object->getDatabase();
 
 $userName = addslashes($_POST['userName']);
 $profession = addslashes($_POST['profession']);

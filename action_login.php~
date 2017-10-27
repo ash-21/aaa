@@ -3,9 +3,11 @@ function __autoload($class_name) {
   require_once $class_name . '.php';
 }
 
+require_once(singleton_database.php);
+
 $database_object = singleton_database::getInstance();
 
-$conn = $database_object->getDatabase();
+$conn =$databaseObject->getDatabase();
 
 $email_userID = addslashes($_POST['email_userID']);
 $password = addslashes($_POST['password']);
