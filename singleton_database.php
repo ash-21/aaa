@@ -4,12 +4,12 @@ class singleton_database {
 	public static function getInstance() {
 		static $instance = null;         
 		if (null === $instance) {
-			$instance = new singleton_database();
+			$instance = new singleton_database;
 		}
 		return $instance;
 	}
 	protected function __construct() {
-		$conn =new mysqli('localHost','root','asdfzxcv','aaaDatabase');
+		$this->$conn =new mysqli('localHost','root','asdfzxcv','aaaDatabase');
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
 		}
@@ -22,7 +22,7 @@ class singleton_database {
 	}
 	
 	public function getDatabase() {
-		return $conn;
+		return $this->$conn;
 	}
 }
    
