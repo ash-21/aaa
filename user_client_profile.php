@@ -33,8 +33,6 @@ class client{
 		$this->email = $email;
 		$this->password = $password;
 		$this->password_hash = password_hash($password, PASSWORD_BCRYPT);
-		
-		echo "<br>{$client_name},{$email},{$phone},{$password}<br>";
 	}
 }
 ?>

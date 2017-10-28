@@ -18,16 +18,16 @@ class strategy_signup{
 	
 	public function __construct($strategy_ind_id) {
         if($strategy_ind_id==='client') {
-        	$this->$strategyObject = new client_signup;
+        	$this->strategyObject = new client_signup;
         }
-        else $this->$strategyObject = new user_signup;
+        else $this->strategyObject = new user_signup;
         
         $this->setup_mail();
     }
     
     public function signUp($user_client_object){
-		if($this->$strategyObject->signUp($user_client_object)===TRUE){
-			$this->_email = $user_client_object->$email;
+		if($this->strategyObject->signUp($user_client_object)===TRUE){
+			$this->_email = $user_client_object->email;
 			$this->send_mail();
 			return TRUE;
 		}
