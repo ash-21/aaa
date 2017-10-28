@@ -1,6 +1,6 @@
 <?php
 class singleton_database {
-	var $conn;
+	private $conn;
 	public static function getInstance() {
 		static $instance = null;         
 		if (null === $instance) {
@@ -9,9 +9,9 @@ class singleton_database {
 		return $instance;
 	}
 	protected function __construct() {
-		$this->$conn =new mysqli('localHost','root','asdfzxcv','aaaDatabase');
-		if ($conn->connect_error) {
-			die("Connection failed: " . $conn->connect_error);
+		$this->conn =new mysqli('localHost','root','asdfzxcv','aaaDatabase');
+		if ($this->conn->connect_error) {
+			die("Connection failed: " . $this->conn->connect_error);
 		}
 	}
       
@@ -22,7 +22,7 @@ class singleton_database {
 	}
 	
 	public function getDatabase() {
-		return $this->$conn;
+		return $this->conn;
 	}
 }
    
