@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<title>Appointment Assistance</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body, html {
+    height: 75%;
+    font-family: "Lato", sans-serif;
+	    }
+
+.menu {
+    display: none;
+}
+.mySlides {display: none}
+</style>
+
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-wide w3-padding w3-card-2">
+    <a href="index.html" class="w3-bar-item w3-button"><b>A</b>utomated <b>A</b>ppointment<b> A</b>ssistant</a>
+    <!-- Float links to the right. Hide them on small screens -->
+    <div class="w3-right w3-hide-small">
+      <a href="signup.html" class="w3-bar-item w3-button">Sign Up</a>
+      <a href="login.html" class="w3-bar-item w3-button">Log In</a>
+      <a href="search.html" class="w3-bar-item w3-button">Search</a>
+    </div>
+  </div>
+</div>
+
+<!-- Page content -->
+<div class="w3-content " style="max-width:2000px;margin-top:46px">
+
+<!-- Page Container -->
+<div class="w3-content w3-padding-64 w3-margin-top" style="max-width:1400px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+  
+    <!-- Left Column -->
+    <div class="w3-third">
+    
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-container">
+<<<<<<< HEAD
+<!----------------------------->
+<!----------------------------->
+<?php
+$dbhost = 'localhost';
+$dbuser = 'root';
+$dbpass = 'asdfzxcv';
+$db = 'aaaDatabase';
+
+
+$conn =new mysqli($dbhost,$dbuser,$dbpass,$db);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$name = addslashes($_POST['name']);
+$profession = addslashes($_POST['profession']);
+
+$query = <<<SQL
+	select profession
+	from users
+	where name = '{$name}'
+SQL;
+
+if ($result= $conn->query($query))
+{
+  $row = $result->fetch_assoc();
+  if($row){
+  	if((strcmp($profession,$row['profession']))==true && (strcmp($name,$row['name']))==true) {
+  		echo "<h2><strong>$row['name']</strong></h2>";
+        echo "<p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>$row['profession']</p>";
+        echo "<p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal">$row['workAddress']</i></p>";
+        echo "<p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>$row['email']</p>";
+        echo "<p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>$row['phone']</p>";
+  	}
+  	else printf("Failure :(");
+  }
+  else printf("No such mail id");
+  $result->free();
+} else {
+    echo "Error: " . $query . "<br>" . $conn->error;
+}
+
+$conn->close();
+
+?>
+<!----------------------------->
+<!----------------------------->
+=======
+          <h2><strong>Jane Doe</strong></h2>
+          <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Designer</p>
+          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>London, UK</p>
+          <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>ex@mail.com</p>
+          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>1224435534</p>
+>>>>>>> fdc4109c7b12dbd89186131f7ae3463d78161406
+          <hr>
+
+        </div>
+      </div><br>
+
+    <!-- End Left Column -->
+    </div>
+
+    <!-- Right Column -->
+    <!-- The Contact Section -->
+  <div class="w3-container w3-content w3-padding-32" style="max-width:950px" id="contact">
+    <h2 class="w3-wide w3-center">Apointment</h2>
+    <p class="w3-opacity w3-center"><i>Make An Appointment</i></p>
+      <div class="w3-col m6">
+        <form action="/action_page.php" target="_blank">
+          <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
+            <div class="w3-half">
+              <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name">
+            </div>
+            <div class="w3-half">
+              <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
+            </div>
+          </div>
+          <input class="w3-input w3-border" type="text" placeholder="Description" required name="Description">
+          <button class="w3-button w3-black w3-section w3-right" type="submit">SEND</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- End Right Column -->
+    </div>
+    
+  <!-- End Grid -->
+  </div>
+  
+  <!-- End Page Container -->
+</div>
+
+<footer class="w3-container w3-teal w3-center w3-margin-top">
+  <p>Find me on social media.</p>
+  <i class="fa fa-facebook-official w3-hover-opacity"></i>
+  <i class="fa fa-instagram w3-hover-opacity"></i>
+  <i class="fa fa-snapchat w3-hover-opacity"></i>
+  <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+  <i class="fa fa-twitter w3-hover-opacity"></i>
+  <i class="fa fa-linkedin w3-hover-opacity"></i>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+</footer>
+
+</body>
+</html>
+
