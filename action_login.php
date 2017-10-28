@@ -48,7 +48,7 @@ if ($result= $conn->query($query))
 		}
 		else print "<h1>No Such Profile <i class=\"fa fa-meh-o\"></i></h1> ";
 	}
-	else printf("No such mail id");
+	elsez printf("No such mail id");
 	$result->free();
 } else {
 	echo "Error: " . $query . "<br>" . $conn->error;
