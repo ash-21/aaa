@@ -45,7 +45,30 @@ print "<form action=\"/form-action\" method=\"POST\">
 	<h3>Description</h3>
 	<input class=\"w3-input w3-border\" type=\"text\" style=\"height:100px\" size=\"1024\">
 	<h3>Appointment Time</h3>
-	<input id=\"date\" type=\"date\">
-	<input type=\"submit\" value=\"Appointment Now!\"> ";
+<input type=\"date\" id=\"dt\" onchange=\"mydate1();\" hidden/>
+<input type=\"text\" id=\"ndt\"  onclick=\"mydate();\" hidden />
+<input type=\"button\" Value=\"Date\" onclick=\"mydate();\" />
+	<input type=\"submit\" value=\"Appointment Now!\"> 
+	</form>
+<script>
+function mydate()
+{
+  //alert("");
+document.getElementById(\"dt\").hidden=false;
+document.getElementById(\"ndt\").hidden=true;
+}
+function mydate1()
+{
+ d=new Date(document.getElementById(\"dt\").value);
+dt=d.getDate();
+mn=d.getMonth();
+mn++;
+yyyy=d.getFullYear();
+document.getElementById(\"ndt\").value=dt+"-"+mn+"-"+yy
+document.getElementById(\"ndt\").hidden=false;
+document.getElementById(\"dt\").hidden=true;
+}</script>
+";
+
 	 
 ?>
