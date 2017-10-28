@@ -1,7 +1,7 @@
 <?php
 require_once('factory_page.php');
 require_once('singleton_database.php');
-
+require_once('iterator_table.php');
 
 $database_object = singleton_database::getInstance();
 $header_factory_object = new header_factory;
@@ -48,18 +48,12 @@ where a.clientID = '{$row['clientID']}' and
 a.userID = u.userID and 
 appointmentTime between date_sub(now(),interval 1 hour) and date_add(now(),interval 1 day)
 SQL;
+print "<p>Today</p>";
 
-if ($result2= $conn->query($query2))
+if ($result= $conn->query($query2))
 {
-	while ($row2 = $result2->fetch_assoc()) {
-		print "<tr>
-		<td><i class=\"w3-text-blue w3-large\"></i></td>
-		<td><i>{$row2['name']}</i></td>
-		<td><i>{$row2['email']}</i></td>
-		<td><i>{$row2['appointmentTime']}</i></td>
-		</tr></tbody>";
-	}
-	$result2->free();
+	$table_builder_object = new profile_table_builder('client',$result);
+	$result->free();
 }
 
 $query3 = <<<SQL
@@ -69,19 +63,15 @@ where a.clientID = '{$row['clientID']}' and
 a.userID = u.userID and 
 appointmentTime > now()
 SQL;
-if ($result2= $conn->query($query3))
+
+print "<p>Future</p>";
+
+if ($result= $conn->query($query3))
 {
-	while ($row2 = $result2->fetch_assoc()) {
-		print "<tbody>
-		<tr>
-		<td><i class=\"w3-text-blue w3-large\"></i></td>
-		<td><i>{$row2['name']}</i></td>
-		<td><i>{$row2['email']}</i></td>
-		<td><i>{$row2['appointmentTime']}</i></td>
-		</tr>";
-	}
-	$result2->free();
+	$table_builder_object = new profile_table_builder('client',$result);
+	$result->free();
 }
+
 
 $conn->close();
 $tail_factory_object->print_page();
