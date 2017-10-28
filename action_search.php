@@ -1,4 +1,5 @@
 <?php
+session_start();
 function __autoload($class_name) {
   require_once $class_name . '.php';
 }
@@ -82,11 +83,12 @@ body, html {
         <table class=\"w3-table w3-striped w3-white\">
           <tbody>
           <tr>
-          <td></td>
-          <td>Name</td>
-          <td>Email</td>
-          <td>Number</td>
-          <td>Work Address</td>
+          <td style=\"background-color:#00B7EB;\"></td>
+          <th style=\"background-color:#00B7EB;\">Name</th>
+          <th style=\"background-color:#00B7EB;\">Email</th>
+          <th style=\"background-color:#00B7EB;\">Number</th>
+          <th style=\"background-color:#00B7EB;\">Work Address</th>
+          <th style=\"background-color:#00B7EB;\">View Profile</th>
           </tr>";
 /****************************************/
 
@@ -94,13 +96,19 @@ if ($result= $conn->query($query))
   {
   while ($row= $result->fetch_assoc())
     {
-    	print "<tr>
-            <td><i class=\"fa fa-user w3-text-blue w3-large\"></i></td>
-            <td>{$row['name']}</td>
+    	print "<form action=\"/profileClient.php\" method=\"POST\">
+			<tr>
+			<td><i class=\"fa fa-user w3-text-blue w3-large\"></i></td>
+            <td>{$row['name']}</a></td>
             <td><i>{$row['email']}</i></td>
             <td><i>{$row['phone']}</i></td>
             <td><i>{$row['workAddress']}</i></td>
-          </tr>";
+            <input type=\"hidden\" name=\"id\" value=\"{$row['userID']}\">
+            <td> 
+            <input class=\"btn btn-success\" type=\"submit\" value=\"GO!\" >
+            </td>
+			</tr>
+          </form>";
     }
   $result->free();
 } else {

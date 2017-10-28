@@ -1,6 +1,7 @@
 <?php
 require_once('factory_page.php');
 require_once('singleton_database.php');
+require_once('iterator_table.php');
 
 
 $database_object = singleton_database::getInstance();
@@ -18,19 +19,6 @@ select *
 from users
 where email = '{$email_userID}' or userID = '{$email_userID}'
 SQL;
-$query2 = <<<SQL
-select *
-from appointments
-where userID = '{$flag}'
-SQL;
-$query3 = <<<SQL
-select *
-from clients
-where clientID = '{$flag2}'
-SQL;
-
-$flag = '';
-
 $header_factory_object->print_page();
 
 if ($result= $conn->query($query))
@@ -44,7 +32,6 @@ if ($result= $conn->query($query))
 			print "<p><i class=\"fa fa-home fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['workAddress']}</p>";
 			print "<p><i class=\"fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['email']}</p>";
 			print "<p><i class=\"fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['phone']}</p>";
-			$flag = $row['userID'];
 		}
 		else print "<h1>No Such Profile <i class=\"fa fa-meh-o\"></i></h1> ";
 	}
@@ -57,23 +44,38 @@ if ($result= $conn->query($query))
 $body_factory_object->print_page();
 
 
-if ($result2= $conn->query($query2))
-{
-	while ($row2 = $result2->fetch_assoc()) {
-		$flag2 = $row2['clientID'];
-		
-		$result3= $conn->query($query3);
-		$row3 = $result3->fetch_assoc();
-		print "<tr>
-		<td><i class=\"w3-text-blue w3-large\"></i></td>
-		<td><i>{$row3['name']}</i></td>
-		<td><i>{$row2['appointmentTime']}</i></td>
-		<td><i>{$row2['appointmentID']}</i></td>
-		</tr>";
-		}
-		$result2->free();
-		}
+$query2 = <<<SQL
+select name,email,appointmentTime
+from appointments as a,clients as c 
+where a.userID = '{$row['userID']}' and 
+a.clientID = c.clientID and 
+appointmentTime between date_sub(now(),interval 1 hour) and date_add(now(),interval 1 day)
+SQL;
 
-		$conn->close();
-		$tail_factory_object->print_page();
-		?>
+print "<p>Today</p>";
+
+if ($result= $conn->query($query2))
+{
+	$table_builder_object = new profile_table_builder('user',$result);
+	$result->free();
+}
+
+$query3 = <<<SQL
+select name,email,appointmentTime
+from appointments as a,clients as c 
+where a.userID = '{$row['userID']}' and 
+a.clientID = c.clientID and 
+appointmentTime > now()
+SQL;
+
+print "<p>Future</p>";
+
+if ($result= $conn->query($query3))
+{
+	$table_builder_object = new profile_table_builder('user',$result);
+	$result->free();
+}
+
+$conn->close();
+$tail_factory_object->print_page();
+?>
