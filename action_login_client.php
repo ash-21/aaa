@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('factory_page.php');
 require_once('singleton_database.php');
 require_once('iterator_table.php');
@@ -28,6 +29,7 @@ if ($result= $conn->query($query))
 	$row = $result->fetch_assoc();
 	if($row){
 		if(((strlen($password) == 0) && is_null($row['password'])) || (password_verify($password,$row['password']))) {
+			$_SESSION['clientID'] = $row['clientID'];
 			$current_state = new client_logged_in($row);
 		}
 		else $current_state = new wrong_password;
@@ -37,7 +39,6 @@ if ($result= $conn->query($query))
 } else {
 	$current_state = new database_error;
 }
-
 $body_factory_object->print_page();
 
 $query2 = <<<SQL

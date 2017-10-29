@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once('factory_page.php');
 require_once('singleton_database.php');
 require_once('iterator_table.php');
@@ -12,7 +14,7 @@ $tail_factory_object = new login_tail_factory;
 $conn = $database_object->getDatabase();
 
 $userID = $_POST['id'];
-$clientID = $_SESSION['userID'];
+$clientID = $_SESSION['clientID'];
 
 $query = <<<SQL
 select *
@@ -41,32 +43,11 @@ else {
 
 $body_factory_object->print_page();
 
-print "<form action=\"/form-action\" method=\"POST\">
+print "<form action=\"/action_appointment.php\" method=\"POST\">
 	<h3>Description</h3>
-	<input class=\"w3-input w3-border\" type=\"text\" style=\"height:100px\" size=\"1024\">
-	<h3>Appointment Time</h3>
-<input type=\"date\" id=\"dt\" onchange=\"mydate1();\" hidden/>
-<input type=\"text\" id=\"ndt\"  onclick=\"mydate();\" hidden />
-<input type=\"button\" Value=\"Date\" onclick=\"mydate();\" />
+	<input class=\"w3-input w3-border\" type=\"text\" name=\"description\" style=\"height:100px\" size=\"1024\">
+	<input type=\"hidden\" name=\"userID\" value=\"{$userID}\">
+	<input type=\"hidden\" name=\"clientID\" value=\"{$clientID}\">
 	<input type=\"submit\" value=\"Appointment Now!\"> 
-	</form>
-<script>
-function mydate()
-{
-document.getElementById(\"dt\").hidden=false;
-document.getElementById(\"ndt\").hidden=true;
-}
-function mydate1()
-{
- d=new Date(document.getElementById(\"dt\").value);
-dt=d.getDate();
-mn=d.getMonth();
-mn++;
-yyyy=d.getFullYear();
-document.getElementById(\"ndt\").value=dt+\"-\"+mn+\"-\"+yy
-document.getElementById(\"ndt\").hidden=false;
-document.getElementById(\"dt\").hidden=true;
-}</script>";
-
-
+	</form>";
 ?>
