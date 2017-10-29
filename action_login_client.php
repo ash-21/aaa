@@ -41,11 +41,12 @@ if ($result= $conn->query($query))
 $body_factory_object->print_page();
 
 $query2 = <<<SQL
-select name,email,appointmentTime
+select name,email,appointmentTime,description
 from appointments as a,users as u 
 where a.clientID = '{$row['clientID']}' and 
 a.userID = u.userID and 
 appointmentTime between date_sub(now(),interval 1 hour) and date_add(now(),interval 1 day)
+order by appointmentTime
 SQL;
 print "<p>Today</p>";
 
@@ -56,11 +57,12 @@ if ($result= $conn->query($query2))
 }
 
 $query3 = <<<SQL
-select name,email,appointmentTime
+select name,email,appointmentTime,description
 from appointments as a,users as u 
 where a.clientID = '{$row['clientID']}' and 
 a.userID = u.userID and 
 appointmentTime > now()
+order by appointmentTime
 SQL;
 
 print "<p>Future</p>";

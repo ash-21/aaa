@@ -55,6 +55,7 @@ class profile_table_builder implements table_builder{
 		<td><span class=\"w3-tag w3-teal w3-round\">{$this->table_type}</span></td>
 		<td><span class=\"w3-tag w3-teal w3-round\">Email</span></td>
 		<td><span class=\"w3-tag w3-teal w3-round\">Appointment Time</span></td>
+		<td><span class=\"w3-tag w3-teal w3-round\">Description</span></td>
 		</tr>
 		</tbody><tbody>";
 	}
@@ -69,6 +70,7 @@ class profile_table_builder implements table_builder{
 		<td><i>{$row_id['name']}</i></td>
 		<td><i>{$row_id['email']}</i></td>
 		<td><i>{$row_id['appointmentTime']}</i></td>
+		<td><i>{$row_id['description']}</i></td>
 		</tr>";
 	}
 
