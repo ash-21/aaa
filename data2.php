@@ -1,7 +1,5 @@
 <?php
-function __autoload($class_name) {
-  require_once $class_name . '.php';
-}
+require_once('singleton_database.php');
 
 $database_object = singleton_database::getInstance();
 

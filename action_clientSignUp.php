@@ -1,6 +1,6 @@
 <?php
-require 'user_client_profile.php';
-require 'strategy_signup.php';
+require_once('user_client_profile.php');
+require_once('strategy_signup.php');
 require_once('state_pattern.php');
 
 $userName = addslashes($_POST['userName']);
