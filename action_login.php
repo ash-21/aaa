@@ -28,8 +28,7 @@ if ($result= $conn->query($query))
 	$row = $result->fetch_assoc();
 	if($row){
 		if(((strlen($password) == 0) && is_null($row['password'])) || (password_verify($password,$row['password']))) {
-			$current_state = new logged_in($row);
-			$flag = TRUE;
+			$current_state = new user_logged_in($row);
 		}
 		else $current_state = new wrong_password;
 	}
