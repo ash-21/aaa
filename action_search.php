@@ -1,15 +1,19 @@
 <?php
 session_start();
-function __autoload($class_name) {
-  require_once $class_name . '.php';
-}
+
+require_once('iterator_table.php');
+require_once('singleton_database.php');
+require_once('factory_page.php');
+
+$header_factory_object = new search_header_factory;
 
 $database_object = singleton_database::getInstance();
-
 $conn = $database_object->getDatabase();
 
 $userName = addslashes($_POST['userName']);
 $profession = addslashes($_POST['profession']);
+
+$table_builder_object = null;
 
 if($userName && $profession){
 $query = <<<SQL
@@ -38,90 +42,17 @@ $query = <<<SQL
 SQL;
 }
 
+$header_factory_object->print_page();
 
-print "<!DOCTYPE html>
-<html>
-<title>Appointment Assistance</title>
-<meta charset=\"UTF-8\">
-<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
-<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">
-<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Lato\">
-<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">
-<style>
-body, html {
-    height: 75%;
-    font-family: \"Lato\", sans-serif;
-	    }
-
-.menu {
-    display: none;
-}
-.mySlides {display: none}
-</style>
-<body>
-
-<!-- Navbar (sit on top) -->
-<div class=\"w3-top\">
-  <div class=\"w3-bar w3-white w3-wide w3-padding w3-card-2\">
-    <a href=\"index.html\" class=\"w3-bar-item w3-button\"><b>A</b>utomated <b>A</b>ppointment<b> A</b>ssistant</a>
-    <!-- Float links to the right. Hide them on small screens -->
-    <div class=\"w3-right w3-hide-small\">
-      <a href=\"search.html\" class=\"w3-bar-item w3-button\">Search</a>
-      <a href=\"index.html\" class=\"w3-bar-item w3-button\">Log Out</a>
-    </div>
-  </div>
-</div>
-
-<!-- Page content -->
-<div class=\"w3-content\" style=\"max-width:2000px;margin-top:46px\">
-
- <!-- The Contact Section -->
-
-  <div class=\"w3-container w3-content w3-padding-64\" style=\"max-width:800px\" id=\"contact\">
-  
-<div class=\"w3-twothird\">
-        <table class=\"w3-table w3-striped w3-white\">
-          <tbody>
-          <tr>
-          <td style=\"background-color:#00B7EB;\"></td>
-          <th style=\"background-color:#00B7EB;\">Name</th>
-          <th style=\"background-color:#00B7EB;\">Email</th>
-          <th style=\"background-color:#00B7EB;\">Number</th>
-          <th style=\"background-color:#00B7EB;\">Work Address</th>
-          <th style=\"background-color:#00B7EB;\">View Profile</th>
-          </tr>";
-/****************************************/
-
-if ($result= $conn->query($query))
-  {
-  while ($row= $result->fetch_assoc())
-    {
-    	print "<form action=\"/profileClient.php\" method=\"POST\">
-			<tr>
-			<td><i class=\"fa fa-user w3-text-blue w3-large\"></i></td>
-            <td>{$row['name']}</a></td>
-            <td><i>{$row['email']}</i></td>
-            <td><i>{$row['phone']}</i></td>
-            <td><i>{$row['workAddress']}</i></td>
-            <input type=\"hidden\" name=\"id\" value=\"{$row['userID']}\">
-            <td> 
-            <input class=\"btn btn-success\" type=\"submit\" value=\"GO!\" >
-            </td>
-			</tr>
-          </form>";
-    }
+if ($result= $conn->query($query)){
+  $table_builder_object = new search_table_builder($result);
   $result->free();
 } else {
     echo "Error: " . $query . "<br>" . $conn->error;
 }
 
 $conn->close();
-
-/**************************************/
-          
-print " </tbody>
-        </html>";
-
+print "</html>"
 ?>
 
 

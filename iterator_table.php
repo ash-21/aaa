@@ -73,4 +73,54 @@ class profile_table_builder implements table_builder{
 	}
 
 }
+
+class search_table_builder implements table_builder{
+	private $iterator;
+
+	public function __construct($result){
+		$this->start_table();
+		$this->iterator = new iterator_table($result);
+
+		while($this->iterator->has_next()===TRUE){
+			$this->build_row($this->iterator->next());
+		}
+
+		$this->end_table();
+	}
+
+	public function start_table(){
+		print "<table class=\"w3-table w3-striped w3-white\">
+          <tbody>
+          <tr>
+          <td style=\"background-color:#00B7EB;\"></td>
+          <th style=\"background-color:#00B7EB;\">Name</th>
+          <th style=\"background-color:#00B7EB;\">Email</th>
+          <th style=\"background-color:#00B7EB;\">Number</th>
+          <th style=\"background-color:#00B7EB;\">Work Address</th>
+          <th style=\"background-color:#00B7EB;\">View Profile</th>
+          </tr>";
+	}
+
+	public function end_table(){
+		print "</tbody></table>";
+	}
+
+	public function build_row($row){
+		print "<form action=\"/profileClient.php\" method=\"POST\">
+			<tr>
+			<td><i class=\"fa fa-user w3-text-blue w3-large\"></i></td>
+            <td>{$row['name']}</a></td>
+            <td><i>{$row['email']}</i></td>
+            <td><i>{$row['phone']}</i></td>
+            <td><i>{$row['workAddress']}</i></td>
+            <input type=\"hidden\" name=\"id\" value=\"{$row['userID']}\">
+            <td> 
+            <input class=\"btn btn-success\" type=\"submit\" value=\"GO!\" >
+            </td>
+			</tr>
+          </form>";
+	}
+
+}
+
 ?>

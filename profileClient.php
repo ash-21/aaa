@@ -53,7 +53,6 @@ print "<form action=\"/form-action\" method=\"POST\">
 <script>
 function mydate()
 {
-  //alert("");
 document.getElementById(\"dt\").hidden=false;
 document.getElementById(\"ndt\").hidden=true;
 }
@@ -64,11 +63,10 @@ dt=d.getDate();
 mn=d.getMonth();
 mn++;
 yyyy=d.getFullYear();
-document.getElementById(\"ndt\").value=dt+"-"+mn+"-"+yy
+document.getElementById(\"ndt\").value=dt+\"-\"+mn+\"-\"+yy
 document.getElementById(\"ndt\").hidden=false;
 document.getElementById(\"dt\").hidden=true;
-}</script>
-";
+}</script>";
 
-	 
+
 ?>
