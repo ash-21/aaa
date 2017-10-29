@@ -53,8 +53,8 @@ class profile_table_builder implements table_builder{
 		<tr>
 		<td></td>
 		<td><span class=\"w3-tag w3-teal w3-round\">{$this->table_type}</span></td>
+		<td><span class=\"w3-tag w3-teal w3-round\">Email</span></td>
 		<td><span class=\"w3-tag w3-teal w3-round\">Appointment Time</span></td>
-		<td><span class=\"w3-tag w3-teal w3-round\">Appointment ID</span></td>
 		</tr>
 		</tbody><tbody>";
 	}
