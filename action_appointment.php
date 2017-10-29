@@ -8,38 +8,27 @@ $conn = $database_object->getDatabase();
 $clientID = addslashes($_POST['clientID']);
 $userID = addslashes($_POST['userID']);
 $description = $_POST['description'];
+$password = null;
 
 $query = <<<SQL
-	INSERT INTO appointments (userID,clientID,description) VALUES('{$userID}','{$clientID}','{$description}');
+INSERT INTO appointments (userID,clientID,description) VALUES('{$userID}','{$clientID}','{$description}');
 SQL;
 
 if ($conn->query($query) === TRUE)
 {
-$query2 = <<<SQL
+	$query2 = <<<SQL
 	select *
 	from clients
 	where clientID = '{$clientID}'
 SQL;
-if ($result= $conn->query($query2))
-{
-	$row = $result->fetch_assoc();
-	$password = $row['password'];
+	if ($result= $conn->query($query2))
+	{
+		$row = $result->fetch_assoc();
+		$password = $row['password'];
+	}
+	$_SESSION['clientID'] = $clientID;
+	$_SESSION['password'] = $password;
+	header("location:action_login_client.php");
 }
 
-print"<html>
-	<body>
-	<form id=\"form1\" action=\"action_login_client.php\" method=\"POST\">
-	<input type=\"hidden\" id=\"email_userID\" value=\"$clientID\" />
-	</form>
-
-	<script>
-	document.getElementById(\"form1\").submit();
-	</script>
-	
-	</body>
-	</html>";
-
-$conn->close();
-}
 ?>
-

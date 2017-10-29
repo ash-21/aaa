@@ -8,11 +8,16 @@ require_once('state_pattern.php');
 $header_factory_object = new header_factory;
 $body_factory_object = new login_body_factory;
 $tail_factory_object = new login_tail_factory;
+$redirect = FALSE;
 
 $database_object = singleton_database::getInstance();
 $conn = $database_object->getDatabase();
 
-$email_userID = addslashes($_POST['email_userID']);
+if(isset($_SESSION['clientID'])){
+	$email_userID = $_SESSION['clientID'];
+	$redirect = TRUE;
+}
+else $email_userID = addslashes($_POST['email_userID']);
 $password = addslashes($_POST['password']);
 
 $current_state = new not_logged_in;
@@ -28,7 +33,8 @@ if ($result= $conn->query($query))
 {
 	$row = $result->fetch_assoc();
 	if($row){
-		if(((strlen($password) == 0) && is_null($row['password'])) || (password_verify($password,$row['password']))) {
+		if($redirect===TRUE) $current_state = new client_logged_in($row);
+		else if(((strlen($password) == 0) && is_null($row['password'])) || (password_verify($password,$row['password']))) {
 			$_SESSION['clientID'] = $row['clientID'];
 			$current_state = new client_logged_in($row);
 		}
