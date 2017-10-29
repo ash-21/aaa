@@ -2,17 +2,19 @@
 require_once('factory_page.php');
 require_once('singleton_database.php');
 require_once('iterator_table.php');
+require_once('state_pattern.php');
 
-
-$database_object = singleton_database::getInstance();
 $header_factory_object = new header_factory;
 $body_factory_object = new login_body_factory;
 $tail_factory_object = new login_tail_factory;
 
+$database_object = singleton_database::getInstance();
 $conn = $database_object->getDatabase();
 
 $email_userID = addslashes($_POST['email_userID']);
 $password = addslashes($_POST['password']);
+
+$current_state = new not_logged_in;
 
 $query = <<<SQL
 select *
@@ -26,19 +28,15 @@ if ($result= $conn->query($query))
 	$row = $result->fetch_assoc();
 	if($row){
 		if(((strlen($password) == 0) && is_null($row['password'])) || (password_verify($password,$row['password']))) {
-			print "<h2><strong>{$row['name']}</strong></h2>";
-			print "<p><i class=\"fa fa-address-card fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['userID']}</p>";
-			print "<p><i class=\"fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['profession']}</p>";
-			print "<p><i class=\"fa fa-home fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['workAddress']}</p>";
-			print "<p><i class=\"fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['email']}</p>";
-			print "<p><i class=\"fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$row['phone']}</p>";
+			$current_state = new logged_in($row);
+			$flag = TRUE;
 		}
-		else print "<h1>No Such Profile <i class=\"fa fa-meh-o\"></i></h1> ";
+		else $current_state = new wrong_password;
 	}
-	elsez printf("No such mail id");
+	else $current_state = new wrong_email;
 	$result->free();
 } else {
-	echo "Error: " . $query . "<br>" . $conn->error;
+	$current_state = new database_error;
 }
 
 $body_factory_object->print_page();
