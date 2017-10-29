@@ -69,12 +69,12 @@ class search_header_factory implements factory_page{
 		<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">
 		<style>
 		body, html {
-		    height: 75%;
-		    font-family: \"Lato\", sans-serif;
-			    }
+			height: 75%;
+			font-family: \"Lato\", sans-serif;
+		}
 
 		.menu {
-		    display: none;
+			display: none;
 		}
 		.mySlides {display: none}
 		</style>
@@ -82,23 +82,23 @@ class search_header_factory implements factory_page{
 
 		<!-- Navbar (sit on top) -->
 		<div class=\"w3-top\">
-		  <div class=\"w3-bar w3-white w3-wide w3-padding w3-card-2\">
-		    <a href=\"index.html\" class=\"w3-bar-item w3-button\"><b>A</b>utomated <b>A</b>ppointment<b> A</b>ssistant</a>
-		    <!-- Float links to the right. Hide them on small screens -->
-		    <div class=\"w3-right w3-hide-small\">
-		      <a href=\"search.html\" class=\"w3-bar-item w3-button\">Search</a>
-		      <a href=\"index.html\" class=\"w3-bar-item w3-button\">Log Out</a>
-		    </div>
-		  </div>
+		<div class=\"w3-bar w3-white w3-wide w3-padding w3-card-2\">
+		<a href=\"index.html\" class=\"w3-bar-item w3-button\"><b>A</b>utomated <b>A</b>ppointment<b> A</b>ssistant</a>
+		<!-- Float links to the right. Hide them on small screens -->
+		<div class=\"w3-right w3-hide-small\">
+		<a href=\"search.html\" class=\"w3-bar-item w3-button\">Search</a>
+		<a href=\"index.html\" class=\"w3-bar-item w3-button\">Log Out</a>
+		</div>
+		</div>
 		</div>
 
 		<!-- Page content -->
 		<div class=\"w3-content\" style=\"max-width:2000px;margin-top:46px\">
 
-		 <!-- The Contact Section -->
+		<!-- The Contact Section -->
 
-		  <div class=\"w3-container w3-content w3-padding-64\" style=\"max-width:800px\" id=\"contact\">
-		  
+		<div class=\"w3-container w3-content w3-padding-64\" style=\"max-width:800px\" id=\"contact\">
+		
 		<div class=\"w3-twothird\">";
 	}
 }

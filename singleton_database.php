@@ -14,10 +14,10 @@ class singleton_database {
 			die("Connection failed: " . $this->conn->connect_error);
 		}
 	}
-      
+	
 	private function __clone() {
 	}
-      
+	
 	private function __wakeup() {
 	}
 	
@@ -25,5 +25,5 @@ class singleton_database {
 		return $this->conn;
 	}
 }
-   
+
 ?>

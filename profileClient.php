@@ -5,12 +5,10 @@ require_once('factory_page.php');
 require_once('singleton_database.php');
 require_once('iterator_table.php');
 
-
-$database_object = singleton_database::getInstance();
 $header_factory_object = new header_factory;
 $body_factory_object = new login_body_factory;
-$tail_factory_object = new login_tail_factory;
 
+$database_object = singleton_database::getInstance();
 $conn = $database_object->getDatabase();
 
 $userID = $_POST['id'];
@@ -44,10 +42,10 @@ else {
 $body_factory_object->print_page();
 
 print "<form action=\"/action_appointment.php\" method=\"POST\">
-	<h3>Description</h3>
-	<input class=\"w3-input w3-border\" type=\"text\" name=\"description\" style=\"height:100px\" size=\"1024\">
-	<input type=\"hidden\" name=\"userID\" value=\"{$userID}\">
-	<input type=\"hidden\" name=\"clientID\" value=\"{$clientID}\">
-	<input type=\"submit\" value=\"Appointment Now!\"> 
-	</form>";
+<h3>Description</h3>
+<input class=\"w3-input w3-border\" type=\"text\" name=\"description\" style=\"height:100px\" size=\"1024\">
+<input type=\"hidden\" name=\"userID\" value=\"{$userID}\">
+<input type=\"hidden\" name=\"clientID\" value=\"{$clientID}\">
+<input type=\"submit\" value=\"Appointment Now!\"> 
+</form>";
 ?>

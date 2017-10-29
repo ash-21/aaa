@@ -20,15 +20,15 @@ if ($conn->query($query) === TRUE)
 	select *
 	from clients
 	where clientID = '{$clientID}'
-SQL;
+	SQL;
 	if ($result= $conn->query($query2))
 	{
-		$row = $result->fetch_assoc();
-		$password = $row['password'];
-	}
-	$_SESSION['clientID'] = $clientID;
-	$_SESSION['password'] = $password;
-	header("location:action_login_client.php");
+$row = $result->fetch_assoc();
+$password = $row['password'];
+}
+$_SESSION['clientID'] = $clientID;
+$_SESSION['password'] = $password;
+header("location:action_login_client.php");
 }
 
 ?>

@@ -17,43 +17,43 @@ $profession = addslashes($_POST['profession']);
 $table_builder_object = null;
 
 if($userName && $profession){
-$query = <<<SQL
+	$query = <<<SQL
 	select *
 	from users
 	where lower(name) like lower('%{$userName}%') 
 	and 
 	lower(profession) like lower('%{$profession}%')
-SQL;
-}
+	SQL;
+	}
 
-if(!$userName && $profession){
-$query = <<<SQL
+	if(!$userName && $profession){
+		$query = <<<SQL
 	select *
 	from users
 	where
 	lower(profession) like lower('%{$profession}%')
-SQL;
-}
+	SQL;
+	}
 
-if($userName && !$profession){
-$query = <<<SQL
+	if($userName && !$profession){
+		$query = <<<SQL
 	select *
 	from users
 	where lower(name) like lower('%{$userName}%') 
-SQL;
-}
+	SQL;
+	}
 
-$header_factory_object->print_page();
+	$header_factory_object->print_page();
 
-if ($result= $conn->query($query)){
-  $table_builder_object = new search_table_builder($result);
-  $result->free();
-} else {
-    echo "Error: " . $query . "<br>" . $conn->error;
-}
+	if ($result= $conn->query($query)){
+		$table_builder_object = new search_table_builder($result);
+	$result->free();
+	} else {
+	echo "Error: " . $query . "<br>" . $conn->error;
+	}
 
-$conn->close();
-print "</html>"
-?>
+	$conn->close();
+	print "</html>"
+	?>
 
 
