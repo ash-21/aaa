@@ -5,7 +5,7 @@ $database_object = singleton_database::getInstance();
 $conn = $database_object->getDatabase();
 
 $appointmentID = $_POST['appointmentID'];
-$clientID = $_POST['clientID'];
+$clientID = $_POST['ID'];
 
 $query = <<<SQL
 DELETE FROM appointments where appointmentID = '{$appointmentID}';

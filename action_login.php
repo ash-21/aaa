@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('factory_page.php');
 require_once('singleton_database.php');
 require_once('iterator_table.php');
@@ -7,10 +8,15 @@ require_once('state_pattern.php');
 $header_factory_object = new header_factory;
 $body_factory_object = new login_body_factory;
 $tail_factory_object = new login_tail_factory;
+$redirect = FALSE;
 
 $database_object = singleton_database::getInstance();
 $conn = $database_object->getDatabase();
 
+if(isset($_SESSION['userID'])){
+	$email_userID = $_SESSION['userID'];
+	$redirect = TRUE;
+}
 $email_userID = addslashes($_POST['email_userID']);
 $password = addslashes($_POST['password']);
 
@@ -42,7 +48,7 @@ $body_factory_object->print_page();
 
 
 $query2 = <<<SQL
-select name,email,appointmentTime,description
+select name,email,appointmentTime,description,appointmentID,userID as ID
 from appointments as a,clients as c 
 where a.userID = '{$row['userID']}' and 
 a.clientID = c.clientID and 
@@ -59,7 +65,7 @@ if ($result= $conn->query($query2))
 }
 
 $query3 = <<<SQL
-select name,email,appointmentTime,description
+select name,email,appointmentTime,description,appointmentID,userID as ID
 from appointments as a,clients as c 
 where a.userID = '{$row['userID']}' and 
 a.clientID = c.clientID and 
