@@ -73,9 +73,10 @@ class profile_table_builder implements table_builder{
 		<td><i>{$row_id['email']}</i></td>
 		<td><i>{$row_id['appointmentTime']}</i></td>
 		<td><i>{$row_id['description']}</i></td>
-		<input type=\"hidden\" name=\"appointmentID\" value=\"{$row_id['appointmentID']}\">
-		<input type=\"hidden\" name=\"clientID\" value=\"{$row_id['ID']}\">
-		<td> 
+		<input type=\"hidden\" name=\"appointmentID\" value=\"{$row_id['appointmentID']}\">";
+		if($this->table_type==='User ID') print "<input type=\"hidden\" name=\"clientID\" value=\"{$row_id['clientID']}\">";
+		else print "<input type=\"hidden\" name=\"userID\" value=\"{$row_id['userID']}\">";
+		print "<td> 
 		<input class=\"btn btn-success\" type=\"submit\" value=\"X\" >
 		</td>
 		</tr>

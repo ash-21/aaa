@@ -33,7 +33,8 @@ if ($result= $conn->query($query))
 {
 	$row = $result->fetch_assoc();
 	if($row){
-		if(((strlen($password) == 0) && is_null($row['password'])) || (password_verify($password,$row['password']))) {
+		if($redirect===TRUE) $current_state = new user_logged_in($row);
+		else if(((strlen($password) == 0) && is_null($row['password'])) || (password_verify($password,$row['password']))) {
 			$current_state = new user_logged_in($row);
 		}
 		else $current_state = new wrong_password;
@@ -48,7 +49,7 @@ $body_factory_object->print_page();
 
 
 $query2 = <<<SQL
-select name,email,appointmentTime,description,appointmentID,userID as ID
+select name,email,appointmentTime,description,appointmentID,userID
 from appointments as a,clients as c 
 where a.userID = '{$row['userID']}' and 
 a.clientID = c.clientID and 
@@ -65,7 +66,7 @@ if ($result= $conn->query($query2))
 }
 
 $query3 = <<<SQL
-select name,email,appointmentTime,description,appointmentID,userID as ID
+select name,email,appointmentTime,description,appointmentID,userID
 from appointments as a,clients as c 
 where a.userID = '{$row['userID']}' and 
 a.clientID = c.clientID and 
