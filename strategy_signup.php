@@ -10,24 +10,28 @@ require_once('user_client_profile.php');
 require_once('singleton_database.php');
 
 class strategy_signup{
-	private $strategyObject = null;
+	private $strategy_object = null;
+	private $user_client_object;
 	private $_email;
+	private $_user_name;
 	private $mail;
 	private $subject = 'AAA account is ready';
 	private $message = 'Thank you for joining with us.You can book appointment with any user on our website.';
 	
-	public function __construct($strategy_ind_id) {
-		if($strategy_ind_id==='client') {
-			$this->strategyObject = new client_signup;
+	public function __construct($user_client_object) {
+		$this->user_client_object = $user_client_object;
+		if(get_class($this->user_client_object)==='client') {
+			$this->strategy_object = new client_signup;
 		}
-		else $this->strategyObject = new user_signup;
+		else $this->strategy_object = new user_signup;
 		
 		$this->setup_mail();
 	}
 	
-	public function signUp($user_client_object){
-		if($this->strategyObject->signUp($user_client_object)===TRUE){
-			$this->_email = $user_client_object->email;
+	public function signUp(){
+		if($this->strategy_object->signUp($this->user_client_object)===TRUE){
+			$this->_email = $this->user_client_object->email;
+			$this->_user_name = $this->user_client_object->name;
 			$this->send_mail();
 			return TRUE;
 		}
@@ -35,21 +39,24 @@ class strategy_signup{
 	}
 	
 	public function send_mail(){
-		
+		$this->mail->addAddress($this->_email,$this->_user_name);
+		$this->mail->Subject = $subject;
+		$this->mail->Body = $message;
+		$this->mail->send();
 	}
 	
 	private function setup_mail(){
-		$mail = new PHPMailer;
-		$mail->isSMTP();
-		$mail->SMTPDebug = 2;
-		$mail->Host = 'smtp.gmail.com';
-		$mail->Port = 587;
-		$mail->SMTPSecure = 'tls';
-		$mail->SMTPAuth = true;
-		$mail->Username = "automatedappointmentassistance@gmail.com";
-		$mail->Password = "nituashraf";
-		$mail->setFrom('automatedappointmentassistance@gmail.com', 'AAA');
-		$mail->addReplyTo('automatedappointmentassistance@gmail.com', 'AAA');
+		$this->mail = new PHPMailer;
+		$this->mail->isSMTP();
+		$this->mail->SMTPDebug = 2;
+		$this->mail->Host = 'smtp.gmail.com';
+		$this->mail->Port = 587;
+		$this->mail->SMTPSecure = 'tls';
+		$this->mail->SMTPAuth = true;
+		$this->mail->Username = "automatedappointmentassistance@gmail.com";
+		$this->mail->Password = "nituashraf";
+		$this->mail->setFrom('automatedappointmentassistance@gmail.com', 'AAA');
+		$this->mail->addReplyTo('automatedappointmentassistance@gmail.com', 'AAA');
 	}
 }
 
@@ -58,14 +65,14 @@ interface strategy{
 }
 
 class client_signup implements strategy{
-	public function signUp($clientObject){
+	public function signUp($client_object){
 		$database_object = singleton_database::getInstance();
 
 		$conn = $database_object->getDatabase();
 		
 		$query = "insert into clients ".
 		"(name,email,phone,password) ".
-		"values( '{$clientObject->client_name}' , '{$clientObject->email}' , '{$clientObject->phone}' , '{$clientObject->password_hash}' )";
+		"values( '{$client_object->client_name}' , '{$client_object->email}' , '{$client_object->phone}' , '{$client_object->password_hash}' )";
 		
 		if ($conn->query($query) === TRUE) return TRUE;
 		return FALSE;
@@ -73,14 +80,14 @@ class client_signup implements strategy{
 }
 
 class user_signup implements strategy{
-	public function signUp($userObject){
+	public function signUp($user_object){
 		$database_object = singleton_database::getInstance();
 		
 		$conn = $database_object->getDatabase();
 		
 		$query = "insert into users ".
 		"(name,profession,homeAddress,workAddress,email,phone,password) ".
-		"values( '{$userObject->user_name}' , '{$userObject->profession}' , '{$userObject->homeAddress}' , '{$userObject->workAddress}' , '{$userObject->email}' , '{$userObject->phone}' , '{$userObject->password_hash}' )";
+		"values( '{$user_object->user_name}' , '{$user_object->profession}' , '{$user_object->homeAddress}' , '{$user_object->workAddress}' , '{$user_object->email}' , '{$user_object->phone}' , '{$user_object->password_hash}' )";
 		
 		if ($conn->query($query) === TRUE) return TRUE;
 		else return FALSE;

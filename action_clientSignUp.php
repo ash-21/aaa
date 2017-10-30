@@ -9,9 +9,12 @@ $phone = addslashes($_POST['phoneNo']);
 $password = $_POST['password'];
 
 $clientObject = new client($userName,$email,$phone,$password);
+
 $current_state = null ;
-$signupObject = new strategy_signup('client');
-if($signupObject->signUp($clientObject)===TRUE){
+
+$signupObject = new strategy_signup($clientObject);
+
+if($signupObject->signUp()===TRUE){
 	$current_state = new successful_signup;
 }
 else {

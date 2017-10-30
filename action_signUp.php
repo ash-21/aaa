@@ -10,11 +10,14 @@ $workAddress = addslashes($_POST['workAddress']);
 $email = addslashes($_POST['email']);
 $phone = addslashes($_POST['phoneNo']);
 $password = $_POST['password'];
-$current_state = null ;
+
 $userObject = new user($userName,$profession,$workAddress,$homeAddress,$email,$phone,$password);
 
-$signupObject = new strategy_signup('user');
-if($signupObject->signUp($userObject)===TRUE){
+$current_state = null ;
+
+$signupObject = new strategy_signup($userObject);
+
+if($signupObject->signUp()===TRUE){
 	$current_state = new successful_signup;
 }
 else {
