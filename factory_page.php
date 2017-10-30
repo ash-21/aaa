@@ -34,7 +34,7 @@ class header_factory implements factory_page{
 		<!-- Float links to the right. Hide them on small screens -->
 		<div class=\"w3-right w3-hide-small\">
 		<a href=\"search.html\" class=\"w3-bar-item w3-button\">Search</a>
-		<a href=\"index.html\" class=\"w3-bar-item w3-button\">Log Out</a>
+		<a href=\"logout.php\" class=\"w3-bar-item w3-button\">Log Out</a>
 		</div>
 		</div>
 		</div>
@@ -87,7 +87,7 @@ class search_header_factory implements factory_page{
 		<!-- Float links to the right. Hide them on small screens -->
 		<div class=\"w3-right w3-hide-small\">
 		<a href=\"search.html\" class=\"w3-bar-item w3-button\">Search</a>
-		<a href=\"index.html\" class=\"w3-bar-item w3-button\">Log Out</a>
+		<a href=\"logout.php\" class=\"w3-bar-item w3-button\">Log Out</a>
 		</div>
 		</div>
 		</div>
