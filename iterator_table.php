@@ -117,7 +117,7 @@ class search_table_builder implements table_builder{
 	}
 
 	public function build_row($row){
-		print "<form action=\"/profileClient.php\" method=\"POST\">
+		print "<form action=\"/profile_client.php\" method=\"POST\">
 		<tr>
 		<td><i class=\"fa fa-user w3-text-blue w3-large\"></i></td>
 		<td>{$row['name']}</a></td>

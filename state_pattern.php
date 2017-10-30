@@ -92,7 +92,7 @@ class unsuccessful_signup extends state{
 	}
 	public function show_page(){
 		print "<script>
-		window.location='errorSignup.html';
+		window.location='error_signup.html';
 		</script>";
 	}
 }
