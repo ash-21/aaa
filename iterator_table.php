@@ -56,6 +56,7 @@ class profile_table_builder implements table_builder{
 		<td><span class=\"w3-tag w3-teal w3-round\">Email</span></td>
 		<td><span class=\"w3-tag w3-teal w3-round\">Appointment Time</span></td>
 		<td><span class=\"w3-tag w3-teal w3-round\">Description</span></td>
+		<td></td>
 		</tr>
 		</tbody><tbody>";
 	}
@@ -65,13 +66,20 @@ class profile_table_builder implements table_builder{
 	}
 
 	public function build_row($row_id){
-		print "<tr>
+		print "<form action=\"/remove_appointment.php\" method=\"POST\">
+		<tr>
 		<td><i class=\"w3-text-blue w3-large\"></i></td>
 		<td><i>{$row_id['name']}</i></td>
 		<td><i>{$row_id['email']}</i></td>
 		<td><i>{$row_id['appointmentTime']}</i></td>
 		<td><i>{$row_id['description']}</i></td>
-		</tr>";
+		<input type=\"hidden\" name=\"appointmentID\" value=\"{$row_id['appointmentID']}\">
+		<input type=\"hidden\" name=\"clientID\" value=\"{$row_id['clientID']}\">
+		<td> 
+		<input class=\"btn btn-success\" type=\"submit\" value=\"X\" >
+		</td>
+		</tr>
+		</form>";
 	}
 
 }

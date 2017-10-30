@@ -1,17 +1,14 @@
 <?php
-
 require_once('singleton_database.php');
 
 $database_object = singleton_database::getInstance();
 $conn = $database_object->getDatabase();
 
-$clientID = addslashes($_POST['clientID']);
-$userID = addslashes($_POST['userID']);
-$description = $_POST['description'];
-$password = null;
+$appointmentID = $_POST['appointmentID'];
+$clientID = $_POST['clientID'];
 
 $query = <<<SQL
-INSERT INTO appointments (userID,clientID,description) VALUES('{$userID}','{$clientID}','{$description}');
+DELETE FROM appointments where appointmentID = '{$appointmentID}';
 SQL;
 
 if ($conn->query($query) === TRUE){
