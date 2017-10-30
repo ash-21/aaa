@@ -23,7 +23,7 @@ if ($conn->query($query) === TRUE){
 	if($user===TRUE){
 		$_SESSION['userID'] = $userID;
 		echo "{$userID}";
-		header("location:action_login_client.php");
+		header("location:action_login.php");
 	}
 	else{
 		$_SESSION['clientID'] = $clientID;

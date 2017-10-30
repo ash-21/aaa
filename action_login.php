@@ -17,7 +17,7 @@ if(isset($_SESSION['userID'])){
 	$email_userID = $_SESSION['userID'];
 	$redirect = TRUE;
 }
-$email_userID = addslashes($_POST['email_userID']);
+else $email_userID = addslashes($_POST['email_userID']);
 $password = addslashes($_POST['password']);
 
 $current_state = new not_logged_in;
