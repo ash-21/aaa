@@ -13,13 +13,13 @@ $redirect = FALSE;
 $database_object = singleton_database::getInstance();
 $conn = $database_object->getDatabase();
 
-if(isset($_POST['email_userID'])){
-	$email_userID = addslashes($_POST['email_userID']);
-	$password = addslashes($_POST['password']);
-}
-else {
+if(isset($_SESSION['userID'])){
 	$email_userID = $_SESSION['userID'];
 	$redirect = TRUE;
+}
+else {
+	$email_userID = addslashes($_POST['email_userID']);
+	$password = addslashes($_POST['password']);
 }
 
 $current_state = new not_logged_in;
@@ -36,6 +36,7 @@ if ($result= $conn->query($query))
 	if($row){
 		if($redirect===TRUE) $current_state = new user_logged_in($row);
 		else if(((strlen($password) == 0) && is_null($row['password'])) || (password_verify($password,$row['password']))) {
+			$_SESSION['userID'] = $row['userID'];
 			$current_state = new user_logged_in($row);
 		}
 		else $current_state = new wrong_password;
