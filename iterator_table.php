@@ -29,6 +29,7 @@ interface table_builder{
 class profile_table_builder implements table_builder{
 	private $table_type;
 	private $iterator;
+	private $count = 0;
 
 	public function __construct($table_type_id,$result){
 		if($table_type_id==='client'){
@@ -42,6 +43,7 @@ class profile_table_builder implements table_builder{
 
 		while($this->iterator->has_next()===TRUE){
 			$this->build_row($this->iterator->next());
+			$this->count++;
 		}
 
 		$this->end_table();
@@ -62,7 +64,7 @@ class profile_table_builder implements table_builder{
 	}
 
 	public function end_table(){
-		print "</tbody></table>";
+		print "</tbody></table><p>Number of result: {$this->count}</p>";
 	}
 
 	public function build_row($row_id){
@@ -87,6 +89,7 @@ class profile_table_builder implements table_builder{
 
 class search_table_builder implements table_builder{
 	private $iterator;
+	private $count = 0;
 
 	public function __construct($result){
 		$this->start_table();
@@ -94,6 +97,7 @@ class search_table_builder implements table_builder{
 
 		while($this->iterator->has_next()===TRUE){
 			$this->build_row($this->iterator->next());
+			$this->count++;
 		}
 
 		$this->end_table();
@@ -113,7 +117,7 @@ class search_table_builder implements table_builder{
 	}
 
 	public function end_table(){
-		print "</tbody></table>";
+		print "</tbody></table><p>Number of result: {$this->count}</p>";
 	}
 
 	public function build_row($row){
