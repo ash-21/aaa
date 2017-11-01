@@ -44,7 +44,7 @@ if($userName && !$profession){
 SQL;
 }
 
-$header_factory_object->print_page();
+$header_factory_object->print_page(null);
 
 if ($result= $conn->query($query)){
 	$table_builder_object = new search_table_builder($result);

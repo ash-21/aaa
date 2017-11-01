@@ -13,12 +13,14 @@ $redirect = FALSE;
 $database_object = singleton_database::getInstance();
 $conn = $database_object->getDatabase();
 
-if(isset($_SESSION['userID'])){
+if(isset($_POST['email_userID'])){
+	$email_userID = addslashes($_POST['email_userID']);
+	$password = addslashes($_POST['password']);
+}
+else {
 	$email_userID = $_SESSION['userID'];
 	$redirect = TRUE;
 }
-else $email_userID = addslashes($_POST['email_userID']);
-$password = addslashes($_POST['password']);
 
 $current_state = new not_logged_in;
 
@@ -27,7 +29,6 @@ select *
 from users
 where email = '{$email_userID}' or userID = '{$email_userID}'
 SQL;
-$header_factory_object->print_page();
 
 if ($result= $conn->query($query))
 {
@@ -45,7 +46,10 @@ if ($result= $conn->query($query))
 	$current_state = new database_error;
 }
 
-$body_factory_object->print_page();
+
+$header_factory_object->print_page($current_state);
+$current_state->show_page();
+$body_factory_object->print_page($current_state);
 
 
 $query2 = <<<SQL
@@ -83,5 +87,5 @@ if ($result= $conn->query($query3))
 }
 
 $conn->close();
-$tail_factory_object->print_page();
+$tail_factory_object->print_page($current_state);
 ?>

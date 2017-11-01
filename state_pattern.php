@@ -25,7 +25,6 @@ class user_logged_in extends state{
 	private $row;
 	public function __construct($row_id){
 		$this->row = $row_id;
-		$this->show_page();
 	}
 	public function show_page(){
 		print "<h2><strong>{$this->row['name']}</strong></h2>";
@@ -41,7 +40,6 @@ class client_logged_in extends state{
 	private $row;
 	public function __construct($row_id){
 		$this->row = $row_id;
-		$this->show_page();
 	}
 	public function show_page(){
 		print "<h2><strong>{$this->row['name']}</strong></h2>";

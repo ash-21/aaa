@@ -35,4 +35,30 @@ class client{
 		$this->password_hash = password_hash($password, PASSWORD_BCRYPT);
 	}
 }
+
+class appointment{
+	public $appointmentID;
+	public $userID;
+	public $clientID;
+	public $time;
+	public $previous_appointment;
+	public $next_appointment;
+
+	public function __construct($appointmentID,$userID,$clientID,$time){
+		$this->appointmentID = $appointmentID;
+		$this->userID = $userID;
+		$this->clientID = $clientID;
+		$this->time = $time;
+	}
+
+	public function add_previous_appointment($prev_app){
+		$this->previous_appointment = $perv_app;
+		return $this;
+	}
+
+	public function add_next_appointment($next_app){
+		$this->next_appointment = $perv_app;
+		return $this;
+	}
+}
 ?>

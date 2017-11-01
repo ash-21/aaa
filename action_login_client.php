@@ -27,7 +27,6 @@ select *
 from clients
 where email = '{$email_userID}' or clientID = '{$email_userID}'
 SQL;
-$header_factory_object->print_page();
 
 if ($result= $conn->query($query))
 {
@@ -45,7 +44,11 @@ if ($result= $conn->query($query))
 } else {
 	$current_state = new database_error;
 }
-$body_factory_object->print_page();
+
+
+$header_factory_object->print_page($current_state);
+$current_state->show_page();
+$body_factory_object->print_page($current_state);
 
 $query2 = <<<SQL
 select name,email,appointmentTime,description,appointmentID,clientID
@@ -80,7 +83,6 @@ if ($result= $conn->query($query3))
 	$result->free();
 }
 
-
 $conn->close();
-$tail_factory_object->print_page();
+$tail_factory_object->print_page($current_state);
 ?>

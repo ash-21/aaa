@@ -32,10 +32,10 @@ class profile_table_builder implements table_builder{
 
 	public function __construct($table_type_id,$result){
 		if($table_type_id==='client'){
-			$this->table_type = 'User ID';
+			$this->table_type = 'User Name';
 		}
 		else if($table_type_id==='user'){
-			$this->table_type = 'Client ID';
+			$this->table_type = 'Client Name';
 		}
 		$this->start_table();
 		$this->iterator = new iterator_table($result);

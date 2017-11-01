@@ -1,10 +1,11 @@
 <?php
 interface factory_page{
-	public function print_page();
+	public function print_page($state);
 }
 
 class header_factory implements factory_page{
-	public function print_page(){
+	public function print_page($state){
+		$this->state = $state;
 		print "<!DOCTYPE html>
 		<html>
 		<title>Appointment Assistance</title>
@@ -58,7 +59,9 @@ class header_factory implements factory_page{
 }
 
 class search_header_factory implements factory_page{
-	public function print_page(){
+	private $state;
+	public function print_page($state){
+		$this->state = $state;
 		print "<!DOCTYPE html>
 		<html>
 		<title>Appointment Assistance</title>
@@ -104,7 +107,7 @@ class search_header_factory implements factory_page{
 }
 
 class login_body_factory implements factory_page{
-	public function print_page(){
+	public function print_page($state){
 		print "
 		<!----------------------------->
 		<!----------------------------->
@@ -127,7 +130,7 @@ class login_body_factory implements factory_page{
 }
 
 class login_tail_factory implements factory_page{
-	public function print_page(){
+	public function print_page($state){
 		print "
 		<!----------------------------->
 		<!----------------------------->
@@ -161,7 +164,7 @@ class login_tail_factory implements factory_page{
 }
 
 class error_header_factory implements factory_page{
-	public function print_page(){
+	public function print_page($state){
 		print "<!DOCTYPE html>
 		<html>
 		<title>Appointment Assistance</title>
@@ -204,7 +207,7 @@ class error_header_factory implements factory_page{
 }
 
 class error_footer_factory implements factory_page{
-	public function print_page(){
+	public function print_page($state){
 		print"
 		<h2 class=\"w3-padding-64 w3-wide w3-center\">CONTACT</h2>
 		<p class=\"w3-opacity w3-center\"><i>Any advice? Drop a note!</i></p>
