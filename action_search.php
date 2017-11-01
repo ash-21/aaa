@@ -2,6 +2,7 @@
 session_start();
 $clientID = $_SESSION['clientID'];
 
+
 require_once('iterator_table.php');
 require_once('singleton_database.php');
 require_once('factory_page.php');

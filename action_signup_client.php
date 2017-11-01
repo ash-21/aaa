@@ -20,6 +20,5 @@ if($signupObject->signUp()===TRUE){
 else {
 	$current_state = new unsuccessful_signup;	
 }
-$conn->close();
 ?>
 

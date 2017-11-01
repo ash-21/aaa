@@ -1,6 +1,6 @@
 <?php
 class user{
-	var $user_name;
+	var $name;
 	var $profession;
 	var $workAddress;
 	var $homeAddress;
@@ -10,7 +10,7 @@ class user{
 	var $password_hash;
 	
 	public function __construct($user_name,$profession,$workAddress,$homeAddress,$email,$phone,$password){
-		$this->user_name = $user_name;
+		$this->name = $user_name;
 		$this->profession = $profession;
 		$this->workAddress = $workAddress;
 		$this->homeAddress = $homeAddress;
@@ -22,13 +22,13 @@ class user{
 }
 
 class client{
-	public $client_name;
+	public $name;
 	public $phone;
 	public $email;
 	public $password;
 	
 	public function __construct($client_name,$email,$phone,$password){
-		$this->client_name = $client_name;
+		$this->name = $client_name;
 		$this->phone = $phone;
 		$this->email = $email;
 		$this->password = $password;

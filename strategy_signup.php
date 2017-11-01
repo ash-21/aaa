@@ -40,8 +40,8 @@ class strategy_signup{
 	
 	public function send_mail(){
 		$this->mail->addAddress($this->_email,$this->_user_name);
-		$this->mail->Subject = $subject;
-		$this->mail->Body = $message;
+		$this->mail->Subject = $this->subject;
+		$this->mail->Body = $this->message;
 		$this->mail->send();
 	}
 	
@@ -72,7 +72,7 @@ class client_signup implements strategy{
 		
 		$query = "insert into clients ".
 		"(name,email,phone,password) ".
-		"values( '{$client_object->client_name}' , '{$client_object->email}' , '{$client_object->phone}' , '{$client_object->password_hash}' )";
+		"values( '{$client_object->name}' , '{$client_object->email}' , '{$client_object->phone}' , '{$client_object->password_hash}' )";
 		
 		if ($conn->query($query) === TRUE) return TRUE;
 		return FALSE;
@@ -87,7 +87,7 @@ class user_signup implements strategy{
 		
 		$query = "insert into users ".
 		"(name,profession,homeAddress,workAddress,email,phone,password) ".
-		"values( '{$user_object->user_name}' , '{$user_object->profession}' , '{$user_object->homeAddress}' , '{$user_object->workAddress}' , '{$user_object->email}' , '{$user_object->phone}' , '{$user_object->password_hash}' )";
+		"values( '{$user_object->name}' , '{$user_object->profession}' , '{$user_object->homeAddress}' , '{$user_object->workAddress}' , '{$user_object->email}' , '{$user_object->phone}' , '{$user_object->password_hash}' )";
 		
 		if ($conn->query($query) === TRUE) return TRUE;
 		else return FALSE;

@@ -24,7 +24,5 @@ else {
 	$current_state = new unsuccessful_signup;
 }
 
-$conn->close();
-
 ?>
 
