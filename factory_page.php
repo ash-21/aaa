@@ -5,8 +5,9 @@ interface factory_page{
 
 class header_factory implements factory_page{
 	public function print_page($state){
+		$page = null;
 		$this->state = $state;
-		print "<!DOCTYPE html>
+		$page .= "<!DOCTYPE html>
 		<html>
 		<title>Appointment Assistance</title>
 		<meta charset=\"UTF-8\">
@@ -35,9 +36,9 @@ class header_factory implements factory_page{
 		<!-- Float links to the right. Hide them on small screens -->
 		<div class=\"w3-right w3-hide-small\">";
 
-		if(get_class($this->state)==='client_logged_in') print"<a href=\"search.html\" class=\"w3-bar-item w3-button\">Search</a>";
+		if(get_class($this->state)==='client_logged_in') $page .= "<a href=\"search.html\" class=\"w3-bar-item w3-button\">Search</a>";
 		
-		print "<a href=\"logout.php\" class=\"w3-bar-item w3-button\">Log Out</a>
+		$page .= "<a href=\"logout.php\" class=\"w3-bar-item w3-button\">Log Out</a>
 		</div>
 		</div>
 		</div>
@@ -52,19 +53,21 @@ class header_factory implements factory_page{
 		<div class=\"w3-row-padding\">
 
 		<!-- Left Column -->
-		<div class=\"w3-third\">
+		<div class=\"w3-quarter\">
 
 		<div class=\"w3-white w3-text-grey w3-card-4\">
 		<div class=\"w3-container\"> ";
 
+	echo "{$page}";
 	}
 }
 
 class search_header_factory implements factory_page{
 	private $state;
 	public function print_page($state){
+		$page = null;
 		$this->state = $state;
-		print "<!DOCTYPE html>
+		$page .= "<!DOCTYPE html>
 		<html>
 		<title>Appointment Assistance</title>
 		<meta charset=\"UTF-8\">
@@ -105,12 +108,15 @@ class search_header_factory implements factory_page{
 		<div class=\"w3-container w3-content w3-padding-64\" style=\"max-width:800px\" id=\"contact\">
 		
 		<div class=\"w3-twothird\">";
+		
+		echo "{$page}";
 	}
 }
 
 class login_body_factory implements factory_page{
 	public function print_page($state){
-		print "
+		$page = null;
+		$page .= "
 		<!----------------------------->
 		<!----------------------------->
 		<hr>
@@ -122,18 +128,21 @@ class login_body_factory implements factory_page{
 		</div>
 
 		<!-- Right Column -->
-		<div class=\"w3-twothird\">
+		<div class=\"w3-threequarter\">
 
 		<div class=\"w3-container w3-card-2 w3-white w3-margin-bottom\">
 		<h2 class=\"w3-text-grey w3-padding-16\"><i class=\"fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal\"></i>Appointments</h2>
 		<div class=\"w3-container\">";
+		
+		echo "{$page}";
 	}
 
 }
 
 class login_tail_factory implements factory_page{
 	public function print_page($state){
-		print "
+		$page = null;
+		$page .= "
 		<!----------------------------->
 		<!----------------------------->
 		<hr>
@@ -162,12 +171,15 @@ class login_tail_factory implements factory_page{
 
 		</body>
 		</html>" ;
+		
+		echo "{$page}";
 	}
 }
 
 class error_header_factory implements factory_page{
 	public function print_page($state){
-		print "<!DOCTYPE html>
+		$page = null;
+		$page .= "<!DOCTYPE html>
 		<html>
 		<title>Appointment Assistance</title>
 		<meta charset=\"UTF-8\">
@@ -205,12 +217,15 @@ class error_header_factory implements factory_page{
 		<div class=\"w3-content\" style=\"max-width:2000px;margin-top:46px\">
 		<!-- The Contact Section -->
 		<div class=\"w3-container w3-content w3-padding-64\" style=\"max-width:950px\" id=\"contact\"> ";
+		
+		echo "{$page}";
 	}
 }
 
 class error_footer_factory implements factory_page{
 	public function print_page($state){
-		print"
+		$page = null;
+		$page .="
 		<h2 class=\"w3-padding-64 w3-wide w3-center\">CONTACT</h2>
 		<p class=\"w3-opacity w3-center\"><i>Any advice? Drop a note!</i></p>
 		<div class=\"w3-row w3-padding-32\">
@@ -250,6 +265,8 @@ class error_footer_factory implements factory_page{
 
 		</body>
 		</html>";
+		
+		echo "{$page}";
 	}
 }
 
