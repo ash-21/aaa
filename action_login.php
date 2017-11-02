@@ -47,11 +47,11 @@ if ($result= $conn->query($query))
 	$current_state = new database_error;
 }
 
-
-$header_factory_object->print_page($current_state);
-$current_state->show_page();
-$body_factory_object->print_page($current_state);
-
+$page = null;
+$page = $header_factory_object->print_page($current_state);
+$page .= $current_state->show_page();
+$page .= $body_factory_object->print_page($current_state);
+echo "{$page}";
 
 $query2 = <<<SQL
 select *
@@ -88,5 +88,6 @@ if ($result= $conn->query($query3))
 }
 
 $conn->close();
-$tail_factory_object->print_page($current_state);
+$page = $tail_factory_object->print_page($current_state);
+echo "{$page}";
 ?>

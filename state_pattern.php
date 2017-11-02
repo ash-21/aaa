@@ -27,12 +27,15 @@ class user_logged_in extends state{
 		$this->row = $row_id;
 	}
 	public function show_page(){
-		print "<h2><strong>{$this->row['name']}</strong></h2>";
-		print "<p><i class=\"fa fa-address-card fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$this->row['userID']}</p>";
-		print "<p><i class=\"fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$this->row['profession']}</p>";
-		print "<p><i class=\"fa fa-home fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$this->row['workAddress']}</p>";
-		print "<p><i class=\"fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$this->row['email']}</p>";
-		print "<p><i class=\"fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$this->row['phone']}</p>";
+		$page = null;
+		$page .= "<h2><strong>{$this->row['name']}</strong></h2>
+		<p><i class=\"fa fa-address-card fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$this->row['userID']}</p>
+		<p><i class=\"fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$this->row['profession']}</p>
+		<p><i class=\"fa fa-home fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$this->row['workAddress']}</p>
+		<p><i class=\"fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$this->row['email']}</p>
+		<p><i class=\"fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$this->row['phone']}</p>";
+		
+		return $page;
 	}
 }
 
@@ -42,10 +45,13 @@ class client_logged_in extends state{
 		$this->row = $row_id;
 	}
 	public function show_page(){
-		print "<h2><strong>{$this->row['name']}</strong></h2>";
-		print "<p><i class=\"fa fa-address-card fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$this->row['clientID']}</p>";
-		print "<p><i class=\"fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$this->row['email']}</p>";
-		print "<p><i class=\"fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$this->row['phone']}</p>";
+		$page = null;
+		$page .= "<h2><strong>{$this->row['name']}</strong></h2>
+		<p><i class=\"fa fa-address-card fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$this->row['clientID']}</p>
+		<p><i class=\"fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$this->row['email']}</p>
+		<p><i class=\"fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal\"></i>{$this->row['phone']}</p>";
+		
+		return $page;
 	}
 }
 

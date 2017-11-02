@@ -20,7 +20,8 @@ from users
 where userID = '{$userID}'
 SQL;
 
-$header_factory_object->print_page(null);
+$page = $header_factory_object->print_page(null);
+echo "{$page}";
 
 if ($result= $conn->query($query))
 {
@@ -39,7 +40,8 @@ else {
 	echo "Error: " . $query . "<br>" . $conn->error;
 }
 
-$body_factory_object->print_page(null);
+$page = $body_factory_object->print_page(null);
+echo "{$page}";
 
 print "<form action=\"/action_appointment.php\" method=\"POST\">
 <h3>Description</h3>

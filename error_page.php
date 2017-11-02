@@ -6,7 +6,8 @@ $wrong_value = $_GET['name'];
 $error_header_factory_object = new error_header_factory;
 $error_footer_factory_object = new error_footer_factory;
 
-$error_header_factory_object->print_page();
+$page = $error_header_factory_object->print_page();
+echo "{$page}";
 
 if(strcmp($wrong_value, "email") == 0){
 	print"
@@ -26,6 +27,6 @@ if(strcmp($wrong_value, "email") == 0){
 		<h1 style=\"color:red;font-size:300%;text-align:center;\">Please, try again later.</h1> ";
 }
 
-$error_footer_factory_object->print_page();
-
+$page = $error_footer_factory_object->print_page();
+echo "{$page}";
 ?>

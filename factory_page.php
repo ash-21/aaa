@@ -58,7 +58,7 @@ class header_factory implements factory_page{
 		<div class=\"w3-white w3-text-grey w3-card-4\">
 		<div class=\"w3-container\"> ";
 
-	echo "{$page}";
+		return $page;
 	}
 }
 
@@ -109,7 +109,7 @@ class search_header_factory implements factory_page{
 		
 		<div class=\"w3-twothird\">";
 		
-		echo "{$page}";
+		return $page;
 	}
 }
 
@@ -134,7 +134,7 @@ class login_body_factory implements factory_page{
 		<h2 class=\"w3-text-grey w3-padding-16\"><i class=\"fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal\"></i>Appointments</h2>
 		<div class=\"w3-container\">";
 		
-		echo "{$page}";
+		return $page;
 	}
 
 }
@@ -172,7 +172,7 @@ class login_tail_factory implements factory_page{
 		</body>
 		</html>" ;
 		
-		echo "{$page}";
+		return $page;
 	}
 }
 
@@ -218,7 +218,7 @@ class error_header_factory implements factory_page{
 		<!-- The Contact Section -->
 		<div class=\"w3-container w3-content w3-padding-64\" style=\"max-width:950px\" id=\"contact\"> ";
 		
-		echo "{$page}";
+		return $page;
 	}
 }
 
@@ -266,7 +266,7 @@ class error_footer_factory implements factory_page{
 		</body>
 		</html>";
 		
-		echo "{$page}";
+		return $page;
 	}
 }
 
