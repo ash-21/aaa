@@ -24,20 +24,24 @@ class iterator_table{
 
 }
 
-interface table_builder{
-	public function start_table();
-	public function end_table();
-	public function build_row($row,$appointment);
-}
-
-class profile_table_builder implements table_builder{
-	private $table_type;
+abstract class table_builder{
 	private $iterator;
 	private $count = 0;
-	private $null_object_factory;
-	private $prev_app;
-	private $next_app;
+	private $page;
+	protected abstract function start_table();
+	protected abstract function build_row($row,$appointment);
+	protected function end_table(){
+		$this->page .= "</tbody></table><p>Number of result: {$this->count}</p>";
+	}
+	public function get_page(){
+		return $this->page;
+	}
+}
+
+class profile_table_builder extends table_builder{
+	private $table_type;
 	private $appointment_array;
+	private $page;
 
 	public function __construct($table_type_id,$result){
 		$appointment_array = array();
@@ -49,15 +53,11 @@ class profile_table_builder implements table_builder{
 			$this->table_type = 'Client Name';
 		}
 		$this->iterator = new iterator_table($result);
-		while($this->iterator->has_next()===TRUE){
-			$this->appointment_array[] = $this->iterator->next();
-			$this->count++;
-		}
 		$this->start_table();
 	}
 
 	public function start_table(){
-		print "<table class=\"w3-table w3-striped w3-white\">
+		$this->page .= "<table class=\"w3-table w3-striped w3-white\">
 		<tbody>
 		<tr>
 		<td></td>
@@ -68,6 +68,10 @@ class profile_table_builder implements table_builder{
 		<td></td>
 		</tr>
 		</tbody><tbody>";
+		while($this->iterator->has_next()===TRUE){
+			$this->appointment_array[] = $this->iterator->next();
+			$this->count++;
+		}
 		$this->get_appointment_list();
 	}
 
@@ -83,12 +87,8 @@ class profile_table_builder implements table_builder{
 		$this->end_table();
 	}
 
-	public function end_table(){
-		print "</tbody></table><p>Number of result: {$this->count}</p>";
-	}
-
 	public function build_row($row_id,$appointment){
-		print "<form action=\"/remove_appointment.php\" method=\"POST\">
+		$this->page .= "<form action=\"/remove_appointment.php\" method=\"POST\">
 		<tr>
 		<td><i class=\"w3-text-blue w3-large\"></i></td>
 		<td><i>{$row_id['name']}</i></td>
@@ -98,36 +98,26 @@ class profile_table_builder implements table_builder{
 		<input type=\"hidden\" name=\"appointmentID\" value=\"{$appointment->appointmentID}\">
 		<input type=\"hidden\" name=\"prev_appointment\" value=\"{$appointment->previous_appointment}\">
 		<input type=\"hidden\" name=\"next_appointment\" value=\"{$appointment->next_appointment}\">";		
-		if($this->table_type==='User Name') print "<input type=\"hidden\" name=\"clientID\" value=\"{$appointment->clientID}\">";
-		else print "<input type=\"hidden\" name=\"userID\" value=\"{$appointment->userID}\">";
-		print "<td> 
-		<input class=\"btn btn-success\" type=\"submit\" name=\"up\" value=\"↑\" >
-		<input class=\"btn btn-success\" type=\"submit\" name=\"down\" value=\"↓\" >
-		<input class=\"btn btn-success\" type=\"submit\" name=\"delete\" value=\"X\" >
+		if($this->table_type==='User Name') $this->page .= "<input type=\"hidden\" name=\"clientID\" value=\"{$appointment->clientID}\">";
+		else $this->page .= "<input type=\"hidden\" name=\"userID\" value=\"{$appointment->userID}\">";
+		$this->page .= "<td>";
+		if($this->table_type==='Client Name') $this->page .="<input class=\"btn btn-success\" type=\"submit\" name=\"up\" value=\"↑\" >";
+		if($this->table_type==='Client Name') $this->page .="<input class=\"btn btn-success\" type=\"submit\" name=\"down\" value=\"↓\" >";
+		$this->page .="<input class=\"btn btn-success\" type=\"submit\" name=\"delete\" value=\"X\" >
 		</td>
 		</tr>
 		</form>";
 	}
 }
 
-class search_table_builder implements table_builder{
-	private $iterator;
-	private $count = 0;
-
+class search_table_builder extends table_builder{
 	public function __construct($result){
-		$this->start_table();
 		$this->iterator = new iterator_table($result);
-
-		while($this->iterator->has_next()===TRUE){
-			$this->build_row($this->iterator->next());
-			$this->count++;
-		}
-
-		$this->end_table();
+		$this->start_table();
 	}
 
 	public function start_table(){
-		print "<table class=\"w3-table w3-striped w3-white\">
+		$this->page .="<table class=\"w3-table w3-striped w3-white\">
 		<tbody>
 		<tr>
 		<td style=\"background-color:#00B7EB;\"></td>
@@ -137,14 +127,17 @@ class search_table_builder implements table_builder{
 		<th style=\"background-color:#00B7EB;\">Work Address</th>
 		<th style=\"background-color:#00B7EB;\">View Profile</th>
 		</tr>";
-	}
 
-	public function end_table(){
-		print "</tbody></table><p>Number of result: {$this->count}</p>";
+		while($this->iterator->has_next()===TRUE){
+			$this->build_row($this->iterator->next());
+			$this->count++;
+		}
+
+		$this->end_table();
 	}
 
 	public function build_row($row,$not_important){
-		print "<form action=\"/profile_client.php\" method=\"POST\">
+		$this->page .="<form action=\"/profile_client.php\" method=\"POST\">
 		<tr>
 		<td><i class=\"fa fa-user w3-text-blue w3-large\"></i></td>
 		<td>{$row['name']}</a></td>
