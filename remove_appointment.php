@@ -15,10 +15,12 @@ else if(isset($_POST['userID'])) {
 	$user = TRUE;	
 } 
 
+echo "{$_POST['prev_appointment']}  =============  {$_POST['next_appointment']} ================ {$_POST['appointmentID']}";
+
 $query = <<<SQL
 DELETE FROM appointments where appointmentID = '{$appointmentID}';
 SQL;
-
+/*
 if ($conn->query($query) === TRUE){
 	if($user===TRUE){
 		$_SESSION['userID'] = $userID;
@@ -29,6 +31,6 @@ if ($conn->query($query) === TRUE){
 		$_SESSION['clientID'] = $clientID;
 		header("location:action_login_client.php");
 	}
-}
+}*/
 
 ?>

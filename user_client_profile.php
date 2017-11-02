@@ -41,23 +41,25 @@ class appointment{
 	public $userID;
 	public $clientID;
 	public $time;
-	public $previous_appointment;
-	public $next_appointment;
+	public $description;
+	public $previous_appointment = null;
+	public $next_appointment = null;
 
-	public function __construct($appointmentID,$userID,$clientID,$time){
+	public function __construct($appointmentID,$userID,$clientID,$time,$description){
 		$this->appointmentID = $appointmentID;
 		$this->userID = $userID;
 		$this->clientID = $clientID;
 		$this->time = $time;
+		$this->description = $description;
 	}
 
 	public function add_previous_appointment($prev_app){
-		$this->previous_appointment = $perv_app;
+		$this->previous_appointment = $prev_app;
 		return $this;
 	}
 
 	public function add_next_appointment($next_app){
-		$this->next_appointment = $perv_app;
+		$this->next_appointment = $next_app;
 		return $this;
 	}
 }

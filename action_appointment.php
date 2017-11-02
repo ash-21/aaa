@@ -7,7 +7,7 @@ $conn = $database_object->getDatabase();
 
 $clientID = addslashes($_POST['clientID']);
 $userID = addslashes($_POST['userID']);
-$description = $_POST['description'];
+$description = addslashes($_POST['description']);
 
 $query = <<<SQL
 INSERT INTO appointments (userID,clientID,description) VALUES('{$userID}','{$clientID}','{$description}')

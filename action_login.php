@@ -54,7 +54,7 @@ $body_factory_object->print_page($current_state);
 
 
 $query2 = <<<SQL
-select name,email,appointmentTime,description,appointmentID,userID
+select *
 from appointments as a,clients as c 
 where a.userID = '{$row['userID']}' and 
 a.clientID = c.clientID and 
@@ -71,7 +71,7 @@ if ($result= $conn->query($query2))
 }
 
 $query3 = <<<SQL
-select name,email,appointmentTime,description,appointmentID,userID
+select *
 from appointments as a,clients as c 
 where a.userID = '{$row['userID']}' and 
 a.clientID = c.clientID and 

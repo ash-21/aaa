@@ -82,7 +82,6 @@ if ($result= $conn->query($query3))
 	$table_builder_object = new profile_table_builder('client',$result);
 	$result->free();
 }
-
 $conn->close();
 $tail_factory_object->print_page($current_state);
 ?>
