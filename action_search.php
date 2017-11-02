@@ -46,15 +46,16 @@ SQL;
 
 $page = null;
 $page = $header_factory_object->print_page(null);
-echo "{$page}";
 
 if ($result= $conn->query($query)){
-	$table_builder_object = new search_table_builder($result);
+	$table_builder_object = new search_table_builder($result,null);
+	$page .= $table_builder_object->get_page();
 	$result->free();
 } else {
 	echo "Error: " . $query . "<br>" . $conn->error;
 }
 
 $conn->close();
-print "</html>"
+$page .= "</html>";
+echo "{$page}";
 ?>

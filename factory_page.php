@@ -1,12 +1,15 @@
 <?php
 interface factory_page{
-	public function print_page($state);
+	public function print_page();
 }
 
 class header_factory implements factory_page{
-	public function print_page($state){
-		$page = null;
+	private $state = null;
+	public function set_state($state){
 		$this->state = $state;
+	}
+	public function print_page(){
+		$page = null;
 		$page .= "<!DOCTYPE html>
 		<html>
 		<title>Appointment Assistance</title>
@@ -63,10 +66,8 @@ class header_factory implements factory_page{
 }
 
 class search_header_factory implements factory_page{
-	private $state;
-	public function print_page($state){
+	public function print_page(){
 		$page = null;
-		$this->state = $state;
 		$page .= "<!DOCTYPE html>
 		<html>
 		<title>Appointment Assistance</title>
@@ -114,7 +115,7 @@ class search_header_factory implements factory_page{
 }
 
 class login_body_factory implements factory_page{
-	public function print_page($state){
+	public function print_page(){
 		$page = null;
 		$page .= "
 		<!----------------------------->
@@ -140,7 +141,7 @@ class login_body_factory implements factory_page{
 }
 
 class login_tail_factory implements factory_page{
-	public function print_page($state){
+	public function print_page(){
 		$page = null;
 		$page .= "
 		<!----------------------------->
@@ -177,7 +178,7 @@ class login_tail_factory implements factory_page{
 }
 
 class error_header_factory implements factory_page{
-	public function print_page($state){
+	public function print_page(){
 		$page = null;
 		$page .= "<!DOCTYPE html>
 		<html>
@@ -223,7 +224,7 @@ class error_header_factory implements factory_page{
 }
 
 class error_footer_factory implements factory_page{
-	public function print_page($state){
+	public function print_page(){
 		$page = null;
 		$page .="
 		<h2 class=\"w3-padding-64 w3-wide w3-center\">CONTACT</h2>

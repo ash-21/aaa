@@ -41,7 +41,6 @@ abstract class table_builder{
 class profile_table_builder extends table_builder{
 	private $table_type;
 	private $appointment_array;
-	private $page;
 
 	public function __construct($table_type_id,$result){
 		$appointment_array = array();

@@ -48,10 +48,8 @@ if ($result= $conn->query($query))
 }
 
 $page = null;
-$page = $header_factory_object->print_page($current_state);
-$page .= $current_state->show_page();
-$page .= $body_factory_object->print_page($current_state);
-echo "{$page}";
+$header_factory_object->set_state($current_state);
+$page = $header_factory_object->print_page().$current_state->show_page().$body_factory_object->print_page();
 
 $query2 = <<<SQL
 select *
@@ -62,14 +60,14 @@ appointmentTime between date_sub(now(),interval 1 hour) and date_add(now(),inter
 order by appointmentTime
 SQL;
 
-print "<p>Today</p>";
+$page .= "<p>Today</p>";
 
 if ($result= $conn->query($query2))
 {
 	$table_builder_object = new profile_table_builder('user',$result);
+	$page .= $table_builder_object->get_page();
 	$result->free();
 }
-
 $query3 = <<<SQL
 select *
 from appointments as a,clients as c 
@@ -78,16 +76,16 @@ a.clientID = c.clientID and
 appointmentTime > now()
 order by appointmentTime
 SQL;
-
-print "<p>Future</p>";
+$page .= "<p>Future</p>";
 
 if ($result= $conn->query($query3))
 {
 	$table_builder_object = new profile_table_builder('user',$result);
+	$page .= $table_builder_object->get_page();
 	$result->free();
 }
 
 $conn->close();
-$page = $tail_factory_object->print_page($current_state);
+$page .= $tail_factory_object->print_page();
 echo "{$page}";
 ?>
