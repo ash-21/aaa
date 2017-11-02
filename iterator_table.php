@@ -101,9 +101,9 @@ class profile_table_builder implements table_builder{
 		if($this->table_type==='User Name') print "<input type=\"hidden\" name=\"clientID\" value=\"{$appointment->clientID}\">";
 		else print "<input type=\"hidden\" name=\"userID\" value=\"{$appointment->userID}\">";
 		print "<td> 
-		<input class=\"btn btn-success\" type=\"submit\" value=\"↑\" >
-		<input class=\"btn btn-success\" type=\"submit\" value=\"↓\" >
-		<input class=\"btn btn-success\" type=\"submit\" value=\"X\" >
+		<input class=\"btn btn-success\" type=\"submit\" name=\"up\" value=\"↑\" >
+		<input class=\"btn btn-success\" type=\"submit\" name=\"down\" value=\"↓\" >
+		<input class=\"btn btn-success\" type=\"submit\" name=\"delete\" value=\"X\" >
 		</td>
 		</tr>
 		</form>";

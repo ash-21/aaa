@@ -15,22 +15,111 @@ else if(isset($_POST['userID'])) {
 	$user = TRUE;	
 } 
 
+
 echo "{$_POST['prev_appointment']}  =============  {$_POST['next_appointment']} ================ {$_POST['appointmentID']}";
 
-$query = <<<SQL
-DELETE FROM appointments where appointmentID = '{$appointmentID}';
+if(isset($_POST['delete'])){
+	$query = <<<SQL
+	DELETE FROM appointments where appointmentID = '{$appointmentID}';
 SQL;
-/*
-if ($conn->query($query) === TRUE){
+	if ($conn->query($query) === TRUE){
+		if($user===TRUE){
+			$_SESSION['userID'] = $userID;
+			header("location:action_login.php");
+		}
+		else{
+			$_SESSION['clientID'] = $clientID;
+			header("location:action_login_client.php");
+		}
+	}
+}
+else if(isset($_POST['up'])){
+	if(strlen($_POST['prev_appointment'])!=0){
+		$query = <<<SQL
+		SELECT *  FROM appointments where appointmentID = '{$_POST['prev_appointment']}';
+SQL;
+		$prev_row = $conn->query($query)->fetch_assoc();
+		echo "<br>('{$prev_row['userID']}','{$prev_row['clientID']}','{$prev_row['appointmentTime']}','{$prev_row['description']}','{$prev_row['appointmentID']}')<br>";
+
+		$query = <<<SQL
+		SELECT *  FROM appointments where appointmentID = '{$appointmentID}';
+SQL;
+		$current_row = $conn->query($query)->fetch_assoc();
+		echo "<br>('{$current_row['userID']}','{$current_row['clientID']}','{$current_row['appointmentTime']}','{$current_row['description']}','{$current_row['appointmentID']}')</br>";
+
+		$temp = $prev_row['appointmentTime'];
+		$prev_row['appointmentTime'] = $current_row['appointmentTime'];
+		$current_row['appointmentTime'] = $temp;
+
+		$query = <<<SQL
+		DELETE FROM appointments where appointmentID = '{$appointmentID}' or appointmentID = '{$_POST['prev_appointment']}';
+SQL;
+		if($conn->query($query)) echo "done";
+		else echo "not done";
+
+		echo "<br>('{$prev_row['userID']}','{$prev_row['clientID']}','{$prev_row['appointmentTime']}','{$prev_row['description']}','{$prev_row['appointmentID']}')<br>";
+		echo "<br>('{$current_row['userID']}','{$current_row['clientID']}','{$current_row['appointmentTime']}','{$current_row['description']}','{$current_row['appointmentID']}')</br>";
+
+		$query = <<<SQL
+		INSERT INTO appointments 
+		VALUES 
+		('{$prev_row['userID']}','{$prev_row['clientID']}','{$prev_row['appointmentTime']}','{$prev_row['description']}','{$prev_row['appointmentID']}'),
+		('{$current_row['userID']}','{$current_row['clientID']}','{$current_row['appointmentTime']}','{$current_row['description']}','{$current_row['appointmentID']}');
+SQL;
+		if($conn->query($query)) echo "done";
+		else echo "not done";
+	}
 	if($user===TRUE){
 		$_SESSION['userID'] = $userID;
-		echo "{$userID}";
 		header("location:action_login.php");
 	}
 	else{
 		$_SESSION['clientID'] = $clientID;
 		header("location:action_login_client.php");
 	}
-}*/
+}
+
+
+else{
+	if(strlen($_POST['next_appointment'])!=0){
+		$query = <<<SQL
+		SELECT *  FROM appointments where appointmentID = '{$_POST['next_appointment']}';
+SQL;
+		$next_row = $conn->query($query)->fetch_assoc();
+
+		$query = <<<SQL
+		SELECT *  FROM appointments where appointmentID = '{$appointmentID}';
+SQL;
+		$current_row = $conn->query($query)->fetch_assoc();
+		echo "<br>('{$current_row['userID']}','{$current_row['clientID']}','{$current_row['appointmentTime']}','{$current_row['description']}','{$current_row['appointmentID']}')</br>";
+
+		$temp = $next_row['appointmentTime'];
+		$next_row['appointmentTime'] = $current_row['appointmentTime'];
+		$current_row['appointmentTime'] = $temp;
+
+		$query = <<<SQL
+		DELETE FROM appointments where appointmentID = '{$appointmentID}' or appointmentID = '{$_POST['next_appointment']}';
+SQL;
+		if($conn->query($query)) echo "done";
+		else echo "not done";
+
+		$query = <<<SQL
+		INSERT INTO appointments 
+		VALUES 
+		('{$next_row['userID']}','{$next_row['clientID']}','{$next_row['appointmentTime']}','{$next_row['description']}','{$next_row['appointmentID']}'),
+		('{$current_row['userID']}','{$current_row['clientID']}','{$current_row['appointmentTime']}','{$current_row['description']}','{$current_row['appointmentID']}');
+SQL;
+		if($conn->query($query)) echo "done";
+		else echo "not done";
+	}
+	if($user===TRUE){
+		$_SESSION['userID'] = $userID;
+		header("location:action_login.php");
+	}
+	else{
+		$_SESSION['clientID'] = $clientID;
+		header("location:action_login_client.php");
+	}
+}
 
 ?>
