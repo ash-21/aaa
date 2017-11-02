@@ -25,9 +25,9 @@ class iterator_table{
 }
 
 abstract class table_builder{
-	private $iterator;
-	private $count = 0;
-	private $page;
+	protected $iterator;
+	protected $count = 0;
+	protected $page;
 	protected abstract function start_table();
 	protected abstract function build_row($row,$appointment);
 	protected function end_table(){
