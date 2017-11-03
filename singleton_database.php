@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Builds a single connection to the database and uses it throughout the session
+ * @author    Md Sakib Anwar 	Roll : 16
+ */
+
 class singleton_database {
 	private $conn;
 	public static function getInstance() {
