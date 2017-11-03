@@ -1,4 +1,9 @@
 <?php
+/**
+ * Shows this page when there is an error in logging in 
+ * @author    Sayeed Md Ashraful Islam 	Roll : 48
+ * @author page message   Mahfida Jerin 	Roll : 26
+ */
 require_once('page_decorator.php');
 
 $wrong_value = $_GET['name'];

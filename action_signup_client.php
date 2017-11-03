@@ -1,3 +1,8 @@
+/**
+ * Gets information from client's sign-up form
+ * @author    Sayeed Md Ashraful Islam 	Roll : 48
+ * @author    Mahfida Jerin 	Roll : 26
+ */
 <?php
 require_once('user_client_profile.php');
 require_once('strategy_signup.php');

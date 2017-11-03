@@ -1,3 +1,8 @@
+/**
+ * Gets information to check sucessful log-in of client or else redirect it
+ * @author    Sayeed Md Ashraful Islam 	Roll : 48
+ * @author query    Mahfida Jerin 	Roll : 26
+ */
 <?php
 session_start();
 require_once('singleton_database.php');

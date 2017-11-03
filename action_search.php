@@ -1,3 +1,7 @@
+/**
+ * Gets information from search form and checks it from database and shows the result in a html page
+ * @author    Sayeed Md Ashraful Islam 	Roll : 48
+ */
 <?php
 session_start();
 $clientID = $_SESSION['clientID'];

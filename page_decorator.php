@@ -1,4 +1,10 @@
 <?php
+/**
+ * Shows this page when there is an error in logging in 
+ * @author       Sayeed Md Ashraful Islam 	Roll : 48
+ * @author page  Mahfida Jerin 	Roll : 26
+ */
+ 
 interface page_decorator{
 	public function decorate_page($page);
 }

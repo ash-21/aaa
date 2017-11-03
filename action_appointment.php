@@ -1,3 +1,8 @@
+/**
+ * Adds information in appointment table if a new appointment is made
+ * @author    Sayeed Md Ashraful Islam 	Roll : 48
+ * @author query   Mahfida Jerin 	Roll : 26
+ */
 <?php
 
 require_once('singleton_database.php');
