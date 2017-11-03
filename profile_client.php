@@ -43,8 +43,9 @@ else {
 $page = $body_decorator_object->decorate_page($page);
 
 $page .= "<form action=\"/action_appointment.php\" method=\"POST\">
-<h3>Description</h3>
-<input class=\"w3-input w3-border\" type=\"text\" name=\"description\" style=\"height:100px\" size=\"1024\">
+<h3 style=\"display: inline;\">Description</h3>
+<h6 style=\"display: inline;\">&nbsp;(around 40 characters)</h6>
+<input class=\"w3-input w3-border\" type=\"text\" name=\"description\" style=\"height:100px\" maxlength=\"40\">
 <input type=\"hidden\" name=\"userID\" value=\"{$userID}\">
 <input type=\"hidden\" name=\"clientID\" value=\"{$clientID}\">
 <input type=\"submit\" value=\"Appointment Now!\"> 
