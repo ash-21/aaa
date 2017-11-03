@@ -1,4 +1,9 @@
 <?php
+/**
+ * Describe the different state a user of the website can be in and their behaviour
+ * @author    Md Sakib Anwar 	Roll : 16
+ */
+
 abstract class state{
 	public abstract function show_page();
 }
