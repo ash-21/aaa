@@ -74,7 +74,7 @@ select *
 from appointments as a,clients as c 
 where a.userID = '{$row['userID']}' and 
 a.clientID = c.clientID and 
-appointmentTime > now()
+appointmentTime > date_add(now(),interval 1 day)
 order by appointmentTime
 SQL;
 $page .= "<p>Future</p>";

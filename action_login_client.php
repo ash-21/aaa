@@ -72,7 +72,7 @@ select name,email,appointmentTime,description,appointmentID,clientID
 from appointments as a,users as u 
 where a.clientID = '{$row['clientID']}' and 
 a.userID = u.userID and 
-appointmentTime > now()
+appointmentTime > date_add(now(),interval 1 day)
 order by appointmentTime
 SQL;
 
