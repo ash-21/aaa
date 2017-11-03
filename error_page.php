@@ -1,13 +1,13 @@
 <?php
-require_once('factory_page.php');
+require_once('page_decorator.php');
 
 $wrong_value = $_GET['name'];
 
-$error_header_factory_object = new error_header_factory;
-$error_footer_factory_object = new error_footer_factory;
+$error_header_decorator_object = new error_header_decorator;
+$error_footer_decorator_object = new error_footer_decorator;
 
 $page = null;
-$page .= $error_header_factory_object->print_page();
+$page = $error_header_decorator_object->decorate_page($page);
 
 if(strcmp($wrong_value, "email") == 0){
 	$page .="
@@ -27,6 +27,6 @@ if(strcmp($wrong_value, "email") == 0){
 		<h1 style=\"color:red;font-size:300%;text-align:center;\">Please, try again later.</h1> ";
 }
 
-$page .= $error_footer_factory_object->print_page();
+$page = $error_footer_decorator_object->decorate_page($page);
 echo "{$page}";
 ?>

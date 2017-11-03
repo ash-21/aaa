@@ -59,7 +59,7 @@ class profile_table_builder extends table_builder{
 	}
 
 	public function start_table(){
-		$this->page .= "<table class=\"w3-table w3-striped w3-white\">
+		$this->page .= "<table class=\"w3-table-all w3-hoverable w3-centered\">
 		<tbody>
 		<tr>
 		<td></td>
@@ -68,8 +68,7 @@ class profile_table_builder extends table_builder{
 		<td><span class=\"w3-tag w3-teal w3-round\">Appointment Time</span></td>
 		<td><span class=\"w3-tag w3-teal w3-round\">Description</span></td>
 		<td></td>
-		</tr>
-		</tbody><tbody>";
+		</tr>";
 		while($this->iterator->has_next()===TRUE){
 			$this->appointment_array[] = $this->iterator->next();
 			$this->count++;
@@ -119,11 +118,12 @@ class search_table_builder extends table_builder{
 	}
 
 	public function start_table(){
-		$this->page .="<table class=\"w3-table w3-striped w3-white\">
+		$this->page .="<table class=\"w3-table-all w3-hoverable w3-centered\">
 		<tbody>
-		<tr>
+		<tr class =\"w3-red\">
 		<td style=\"background-color:#00B7EB;\"></td>
 		<th style=\"background-color:#00B7EB;\">Name</th>
+		<th style=\"background-color:#00B7EB;\">Profession</th>
 		<th style=\"background-color:#00B7EB;\">Email</th>
 		<th style=\"background-color:#00B7EB;\">Number</th>
 		<th style=\"background-color:#00B7EB;\">Work Address</th>
@@ -142,7 +142,8 @@ class search_table_builder extends table_builder{
 		$this->page .="<form action=\"/profile_client.php\" method=\"POST\">
 		<tr>
 		<td><i class=\"fa fa-user w3-text-blue w3-large\"></i></td>
-		<td>{$row['name']}</a></td>
+		<td><i>{$row['name']}</i></td>
+		<td><i>{$row['profession']}</i></td>
 		<td><i>{$row['email']}</i></td>
 		<td><i>{$row['phone']}</i></td>
 		<td><i>{$row['workAddress']}</i></td>
