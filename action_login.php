@@ -1,5 +1,5 @@
 /**
- * Gets information to check sucessful log-in of client or else redirect it
+ * Gets information to check sucessful log-in of user or else redirect it
  * @author    Sayeed Md Ashraful Islam 	Roll : 48
  * @author query    Mahfida Jerin 	Roll : 26
  */

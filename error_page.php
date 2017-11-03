@@ -1,6 +1,6 @@
 <?php
 /**
- * Shows this page when there is an error in logging in 
+ * Generates all types of error pages using decorator pattern 
  * @author    Sayeed Md Ashraful Islam 	Roll : 48
  * @author page message   Mahfida Jerin 	Roll : 26
  */

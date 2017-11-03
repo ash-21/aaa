@@ -1,6 +1,6 @@
 <?php
 /**
- * remove appointment
+ * Modify appointment of User or Client
  * @author    Sayeed Md Ashraful Islam 	Roll : 48
  */
  

@@ -1,6 +1,6 @@
 <?php
 /**
- * Shows this page when there is an error in logging in 
+ * Create a page according to the states
  * @author       Sayeed Md Ashraful Islam 	Roll : 48
  * @author page  Mahfida Jerin 	Roll : 26
  */

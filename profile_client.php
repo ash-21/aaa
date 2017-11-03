@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Shows this page when there is an error in logging in 
+ * User's profile page in the view of client & appointment form 
  * @author    Sayeed Md Ashraful Islam 	Roll : 48
  * @author form   Mahfida Jerin 	Roll : 26
  */
