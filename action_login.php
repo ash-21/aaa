@@ -1,13 +1,14 @@
 <?php
 session_start();
-require_once('factory_page.php');
 require_once('singleton_database.php');
 require_once('iterator_table.php');
 require_once('state_pattern.php');
+require_once('page_decorator.php');
 
-$header_factory_object = new header_factory;
-$body_factory_object = new login_body_factory;
-$tail_factory_object = new login_tail_factory;
+
+$header_decorator_object = new header_decorator;
+$body_decorator_object = new login_body_decorator;
+$tail_decorator_object = new login_tail_decorator;
 $redirect = FALSE;
 
 $database_object = singleton_database::getInstance();
@@ -48,8 +49,8 @@ if ($result= $conn->query($query))
 }
 
 $page = null;
-$header_factory_object->set_state($current_state);
-$page = $header_factory_object->print_page().$current_state->show_page().$body_factory_object->print_page();
+$header_decorator_object->set_state($current_state);
+$page = $body_decorator_object->decorate_page($header_decorator_object->decorate_page($page).$current_state->show_page());
 
 $query2 = <<<SQL
 select *
@@ -64,8 +65,8 @@ $page .= "<p>Today</p>";
 
 if ($result= $conn->query($query2))
 {
-	$table_builder_object = new profile_table_builder('user',$result);
-	$page .= $table_builder_object->get_page();
+	$table_decorator_object = new profile_table_builder('user',$result);
+	$page .= $table_decorator_object->get_page();
 	$result->free();
 }
 $query3 = <<<SQL
@@ -80,12 +81,12 @@ $page .= "<p>Future</p>";
 
 if ($result= $conn->query($query3))
 {
-	$table_builder_object = new profile_table_builder('user',$result);
-	$page .= $table_builder_object->get_page();
+	$table_decorator_object = new profile_table_builder('user',$result);
+	$page .= $table_decorator_object->get_page();
 	$result->free();
 }
 
 $conn->close();
-$page .= $tail_factory_object->print_page();
+$page = $tail_decorator_object->decorate_page($page);
 echo "{$page}";
 ?>

@@ -5,9 +5,9 @@ $clientID = $_SESSION['clientID'];
 
 require_once('iterator_table.php');
 require_once('singleton_database.php');
-require_once('factory_page.php');
+require_once('page_decorator.php');
 
-$header_factory_object = new search_header_factory;
+$header_decorator_object = new search_header_decorator;
 
 $database_object = singleton_database::getInstance();
 $conn = $database_object->getDatabase();
@@ -15,7 +15,7 @@ $conn = $database_object->getDatabase();
 $userName = addslashes($_POST['userName']);
 $profession = addslashes($_POST['profession']);
 
-$table_builder_object = null;
+$table_decorator_object = null;
 
 if($userName && $profession){
 	$query = <<<SQL
@@ -45,11 +45,11 @@ SQL;
 }
 
 $page = null;
-$page = $header_factory_object->print_page(null);
+$page = $header_decorator_object->decorate_page($page);
 
 if ($result= $conn->query($query)){
-	$table_builder_object = new search_table_builder($result,null);
-	$page .= $table_builder_object->get_page();
+	$table_decorator_object = new search_table_builder($result,null);
+	$page .= $table_decorator_object->get_page();
 	$result->free();
 } else {
 	echo "Error: " . $query . "<br>" . $conn->error;
