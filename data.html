@@ -1,24 +1,8 @@
 <!DOCTYPE html>
-<html>
-<title>Appointment Assistance</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <style> /* set the CSS */
 
-body, html {
-	height: 75%;
-	font-family: "Lato", sans-serif;
-}
-
-.menu {
-	display: none;
-}
-
-.mySlides {display: none}
+body { font: 12px Arial;}
 
 path { 
 	stroke: steelblue;
@@ -54,22 +38,6 @@ path {
 
 </style>
 <body>
-	<div class="w3-top">
-		<div class="w3-bar w3-white w3-wide w3-padding w3-card-2">
-			<a href="index.html" class="w3-bar-item w3-button"><b>A</b>utomated <b>A</b>ppointment<b> A</b>ssistant</a>
-			<!-- Float links to the right. Hide them on small screens -->
-			<div class="w3-right w3-hide-small">
-				<a href="data.html" class="w3-bar-item w3-button">Data Visualization</a>
-				<a href="signup.html" class="w3-bar-item w3-button">Sign Up</a>
-				<a href="login.html" class="w3-bar-item w3-button">Log In</a>
-			</div>
-		</div>
-	</div>
-
-	<!-- Page content -->
-	<div class="w3-container w3-content w3-padding-32" style="max-width:100%;margin-top:46px">
-
-
 	<h1>Number of appointments over the year</h1>
 
 	<!-- load the d3.js library -->    
@@ -139,9 +107,8 @@ d3.json("appointment_over_time.php", function(error, data) {
 
 });
 </script>
-</div>
-<div class="w3-container w3-content w3-padding-32" style="max-width:100%;margin-top:46px">
-	
+
+
 <h1>Number of people with different profession</h1>
 <script>
 	var margin1 = {top: 20, right: 20, bottom: 70, left: 40},
@@ -218,16 +185,4 @@ d3.json("appointment_over profession.php", function(error, data) {
 });
 
 </script>
-</div>
-<!-- Footer -->
-	<footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
-		<i class="fa fa-facebook-official w3-hover-opacity"></i>
-		<i class="fa fa-instagram w3-hover-opacity"></i>
-		<i class="fa fa-snapchat w3-hover-opacity"></i>
-		<i class="fa fa-pinterest-p w3-hover-opacity"></i>
-		<i class="fa fa-twitter w3-hover-opacity"></i>
-		<i class="fa fa-linkedin w3-hover-opacity"></i>
-		<p class="w3-medium">Powered by <a href="https://www.facebook.com" target="_blank">Ashraf Mahfida Sakib</a></p>
-	</footer>
 </body>
-</html>

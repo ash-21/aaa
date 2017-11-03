@@ -39,6 +39,7 @@ class header_decorator implements page_decorator{
 		<div class=\"w3-right w3-hide-small\">";
 
 		if(get_class($this->state)==='client_logged_in') $page .= "<a href=\"search.html\" class=\"w3-bar-item w3-button\">Search</a>";
+		if(get_class($this->state)==='user_logged_in') $page .= "<a href=\"user_data.html\" class=\"w3-bar-item w3-button\">Data Visualization</a>";
 		
 		$page .= "<a href=\"logout.php\" class=\"w3-bar-item w3-button\">Log Out</a>
 		</div>
