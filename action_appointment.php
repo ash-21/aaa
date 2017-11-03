@@ -4,7 +4,11 @@
  * @author query   Mahfida Jerin 	Roll : 26
  */
 <?php
-
+/**
+ * 		@author    
+ *		Sayeed Md Ashraful Islam
+ *      Roll : 48
+ */
 require_once('singleton_database.php');
 
 $database_object = singleton_database::getInstance();
@@ -13,10 +17,13 @@ $conn = $database_object->getDatabase();
 $clientID = addslashes($_POST['clientID']);
 $userID = addslashes($_POST['userID']);
 $description = addslashes($_POST['description']);
-$date =  $_POST['Date'];
-
-$timestamp = strtotime($date);
-$converted_date = date("Y-m-d H:i:s", $timestamp);
+if(empty($_POST['Date'])){
+	$converted_date = date('Y-m-d H:i:s');
+} else {
+	$date =  $_POST['Date'];
+	$timestamp = strtotime($date);
+	$converted_date = date("Y-m-d H:i:s", $timestamp);
+}
 
 while(TRUE){
 $start = <<<SQL
