@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Uses iterator and template pattern to build tables for profile and search purpose
+ * @author    Md Sakib Anwar 	Roll : 16
+ */
 require_once('null_pattern.php');
 require_once('user_client_profile.php');
 
@@ -24,6 +27,7 @@ class iterator_table{
 
 }
 
+// template pattern : the end_table() and get_page() methods are same but others are different for the childs
 abstract class table_builder{
 	protected $iterator;
 	protected $count = 0;
