@@ -1,4 +1,8 @@
 <?php
+/**
+ * Uses command pattern to carry out sign up using strategy pattern
+ * @author    Md Sakib Anwar 	Roll : 16
+ */
 require_once('user_client_profile.php');
 require_once('singleton_database.php');
 require_once('send_mail_facade.php');
