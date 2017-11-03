@@ -48,6 +48,7 @@ $page .= "<form action=\"/action_appointment.php\" method=\"POST\">
 <input class=\"w3-input w3-border\" type=\"text\" name=\"description\" style=\"height:100px\" maxlength=\"40\">
 <input type=\"hidden\" name=\"userID\" value=\"{$userID}\">
 <input type=\"hidden\" name=\"clientID\" value=\"{$clientID}\">
+<input type=\"datetime-local\" name=\"Date\" placeholder=\"MM-DD-YYYY HH:MM AM/PM\">
 <input type=\"submit\" value=\"Appointment Now!\"> 
 </form>";
 

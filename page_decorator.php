@@ -34,7 +34,7 @@ class header_decorator implements page_decorator{
 		<!-- Navbar (sit on top) -->
 		<div class=\"w3-top\">
 		<div class=\"w3-bar w3-white w3-wide w3-padding w3-card-2\">
-		<a href=\"\" class=\"w3-bar-item w3-button\"><b>A</b>utomated <b>A</b>ppointment<b> A</b>ssistant</a>
+		<a href=\"action_login_client.php\" class=\"w3-bar-item w3-button\"><b>A</b>utomated <b>A</b>ppointment<b> A</b>ssistant</a>
 		<!-- Float links to the right. Hide them on small screens -->
 		<div class=\"w3-right w3-hide-small\">";
 
