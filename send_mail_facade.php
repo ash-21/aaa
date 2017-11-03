@@ -1,4 +1,8 @@
 <?php
+/**
+ * Does everything related to mail sending using a single class i.e. Facade pattern
+ * @author    Md Sakib Anwar 	Roll : 16
+ */
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
