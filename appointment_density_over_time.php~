@@ -1,7 +1,4 @@
 <?php
-/**
- * @author    Md Sakib Anwar 	Roll : 16
- */
 session_start();
 require_once('singleton_database.php');
 $userID = $_SESSION['userID'];

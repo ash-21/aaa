@@ -1,7 +1,4 @@
 <?php
-/**
- * @author    Md Sakib Anwar 	Roll : 16
- */
 require_once('singleton_database.php');
 
 $database_object = singleton_database::getInstance();
