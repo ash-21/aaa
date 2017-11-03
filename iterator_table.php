@@ -3,7 +3,6 @@
  * Uses iterator and template pattern to build tables for profile and search purpose
  * @author    Md Sakib Anwar 	Roll : 16
  */
-require_once('null_pattern.php');
 require_once('user_client_profile.php');
 
 class iterator_table{
@@ -132,7 +131,7 @@ class search_table_builder extends table_builder{
 		</tr>";
 
 		while($this->iterator->has_next()===TRUE){
-			$this->build_row($this->iterator->next());
+			$this->build_row($this->iterator->next(),null);
 			$this->count++;
 		}
 

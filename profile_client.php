@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-require_once('factory_page.php');
+require_once('page_decorator.php');
 require_once('singleton_database.php');
 require_once('iterator_table.php');
 
-$header_factory_object = new header_factory;
-$body_factory_object = new login_body_factory;
+$header_decorator_object = new header_decorator;
+$body_decorator_object = new login_body_decorator;
 
 $database_object = singleton_database::getInstance();
 $conn = $database_object->getDatabase();
@@ -21,7 +21,7 @@ where userID = '{$userID}'
 SQL;
 
 $page = null;
-$page = $header_factory_object->print_page();
+$page = $header_decorator_object->decorate_page($page);
 
 if ($result= $conn->query($query))
 {
@@ -40,7 +40,7 @@ else {
 	echo "Error: " . $query . "<br>" . $conn->error;
 }
 
-$page .= $body_factory_object->print_page(null);
+$page = $body_decorator_object->decorate_page($page);
 
 $page .= "<form action=\"/action_appointment.php\" method=\"POST\">
 <h3>Description</h3>

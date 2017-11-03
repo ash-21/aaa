@@ -15,24 +15,20 @@ else if(isset($_POST['userID'])) {
 	$user = TRUE;	
 } 
 
-
-echo "{$_POST['prev_appointment']}  =============  {$_POST['next_appointment']} ================ {$_POST['appointmentID']}";
-
+//if delete button was pressed
 if(isset($_POST['delete'])){
 	$query = <<<SQL
 	DELETE FROM appointments where appointmentID = '{$appointmentID}';
 SQL;
-	if ($conn->query($query) === TRUE){
-		if($user===TRUE){
-			$_SESSION['userID'] = $userID;
-			header("location:action_login.php");
-		}
-		else{
-			$_SESSION['clientID'] = $clientID;
-			header("location:action_login_client.php");
-		}
-	}
+	$conn->query($query);
 }
+
+
+/**
+ * Moves the appointment up or down
+ * @author    Md Sakib Anwar 	Roll : 16
+ */
+//if the up button was pressed
 else if(isset($_POST['up'])){
 	if(strlen($_POST['prev_appointment'])!=0){
 		$query = <<<SQL
@@ -66,20 +62,11 @@ SQL;
 		('{$prev_row['userID']}','{$prev_row['clientID']}','{$prev_row['appointmentTime']}','{$prev_row['description']}','{$prev_row['appointmentID']}'),
 		('{$current_row['userID']}','{$current_row['clientID']}','{$current_row['appointmentTime']}','{$current_row['description']}','{$current_row['appointmentID']}');
 SQL;
-		if($conn->query($query)) echo "done";
-		else echo "not done";
-	}
-	if($user===TRUE){
-		$_SESSION['userID'] = $userID;
-		header("location:action_login.php");
-	}
-	else{
-		$_SESSION['clientID'] = $clientID;
-		header("location:action_login_client.php");
+		$conn->query($query);
 	}
 }
 
-
+//if the down button was pressed
 else{
 	if(strlen($_POST['next_appointment'])!=0){
 		$query = <<<SQL
@@ -109,17 +96,18 @@ SQL;
 		('{$next_row['userID']}','{$next_row['clientID']}','{$next_row['appointmentTime']}','{$next_row['description']}','{$next_row['appointmentID']}'),
 		('{$current_row['userID']}','{$current_row['clientID']}','{$current_row['appointmentTime']}','{$current_row['description']}','{$current_row['appointmentID']}');
 SQL;
-		if($conn->query($query)) echo "done";
-		else echo "not done";
+		$conn->query($query);
 	}
-	if($user===TRUE){
-		$_SESSION['userID'] = $userID;
-		header("location:action_login.php");
-	}
-	else{
-		$_SESSION['clientID'] = $clientID;
-		header("location:action_login_client.php");
-	}
+}
+
+//redirect to original page
+if($user===TRUE){
+	$_SESSION['userID'] = $userID;
+	header("location:action_login.php");
+}
+else{
+	$_SESSION['clientID'] = $clientID;
+	header("location:action_login_client.php");
 }
 
 ?>
