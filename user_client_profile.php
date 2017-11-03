@@ -1,4 +1,8 @@
 <?php
+/**
+ * describes the thre basic class of the website : user,client and appointments
+ * @author    Md. Sakib Anwar 		Roll : 16
+ */
 class user{
 	var $name;
 	var $profession;
@@ -36,6 +40,8 @@ class client{
 	}
 }
 
+
+//  builder pattern have been used here in order to create multiple type of appointments
 class appointment{
 	public $appointmentID;
 	public $userID;
