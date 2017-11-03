@@ -1,6 +1,6 @@
 <?php
 /**
- * Shows this page when there is an error in logging in 
+ * remove appointment
  * @author    Sayeed Md Ashraful Islam 	Roll : 48
  */
  
